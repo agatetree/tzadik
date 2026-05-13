@@ -1,0 +1,1510 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>הילולא דצדיקיא</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,sans-serif;background:#f0f2f5;color:#222;direction:rtl;min-height:100vh}
+header{background:#1a2e44;color:#fff;padding:16px 20px;text-align:center;position:relative}
+header h1{font-size:1.5rem;letter-spacing:1px}
+.lang-toggle{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.35);color:#fff;border-radius:14px;padding:4px 12px;cursor:pointer;font-size:.75rem;font-weight:bold;letter-spacing:.5px}
+.lang-toggle:hover{background:rgba(255,255,255,.28)}
+.tabs{display:flex;background:#243b55}
+.tab-btn{flex:1;padding:12px 6px;background:none;border:none;border-bottom:3px solid transparent;color:#aac;cursor:pointer;font-size:0.85rem;transition:all .2s}
+.tab-btn.active{border-bottom-color:#4a9eda;color:#fff;background:#1a2e44}
+.tab-btn:hover:not(.active){background:#2d4a63;color:#eee}
+.content{max-width:680px;margin:0 auto;padding:20px 14px}
+.date-box{text-align:center;background:#fff;border-radius:10px;padding:22px 20px;margin-bottom:18px;border:1px solid #dde;box-shadow:0 2px 6px rgba(0,0,0,.06)}
+.date-big{font-size:2rem;font-weight:bold;color:#1a2e44;margin-bottom:8px}
+.badge{display:inline-block;background:#4a9eda;color:#fff;border-radius:20px;padding:4px 16px;font-size:.9rem}
+.card{background:#fff;border:1px solid #dde;border-radius:8px;padding:14px 16px;margin-bottom:8px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.card .cname{font-size:1.05rem;font-weight:bold;color:#1a2e44}
+.card .ctitle{color:#666;font-size:.9rem;margin-top:4px;font-style:italic}
+.card .cyears{color:#999;font-size:.82rem;margin-top:5px}
+.cday-badge{background:#e8f0fe;color:#1a2e44;border-radius:12px;padding:2px 10px;font-size:.82rem;font-weight:bold;white-space:nowrap;margin-right:6px;flex-shrink:0}
+.month-header{background:#243b55;color:#fff;padding:8px 14px;border-radius:6px;margin:14px 0 8px;font-weight:bold;font-size:.93rem}
+.no-res{text-align:center;color:#aaa;padding:40px 20px;font-size:1rem}
+/* search bar */
+.search-bar{background:#fff;padding:14px 16px;border-radius:8px;border:1px solid #dde;margin-bottom:12px}
+.search-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.search-row label{font-weight:bold;color:#1a2e44;white-space:nowrap;font-size:.93rem}
+.name-search{margin-top:10px}
+.name-search input{width:100%}
+select,input[type=text],input[type=number],textarea{padding:7px 10px;border:1px solid #ccd;border-radius:6px;font-size:.93rem;direction:rtl;background:#fff;color:#222;font-family:inherit}
+select:focus,input:focus,textarea:focus{outline:none;border-color:#4a9eda}
+textarea{resize:vertical;min-height:60px}
+/* buttons */
+.btn{background:#4a9eda;color:#fff;border:none;padding:9px 20px;border-radius:6px;cursor:pointer;font-size:.93rem}
+.btn:hover{background:#357ab8}
+.btn-outline{background:#fff;color:#4a9eda;border:1.5px solid #4a9eda;padding:7px 14px;border-radius:6px;cursor:pointer;font-size:.88rem}
+.btn-outline:hover,.btn-outline.active{background:#4a9eda;color:#fff}
+.btn-sm{padding:6px 14px;font-size:.84rem}
+.btn-danger{background:#e74c3c;color:#fff;border:none;padding:6px 14px;border-radius:6px;cursor:pointer;font-size:.84rem}
+.btn-danger:hover{background:#c0392b}
+/* forms */
+.form-card{background:#fff;border:1px solid #dde;border-radius:8px;padding:18px;box-shadow:0 1px 3px rgba(0,0,0,.04);margin-bottom:14px}
+.form-card h3{color:#1a2e44;margin-bottom:14px;font-size:1rem;border-bottom:1px solid #eee;padding-bottom:8px}
+.form-group{margin-bottom:12px}
+.form-group label{display:block;font-weight:bold;margin-bottom:5px;color:#1a2e44;font-size:.9rem}
+.form-group select,.form-group input,.form-group textarea{width:100%}
+.form-row{display:flex;gap:10px}
+.form-row .form-group{flex:1}
+/* messages */
+.success{background:#d4edda;color:#155724;border:1px solid #c3e6cb;border-radius:6px;padding:10px 14px;margin-top:10px;font-size:.9rem}
+.error-msg{background:#f8d7da;color:#721c24;border:1px solid #f5c6cb;border-radius:6px;padding:10px 14px;margin-top:10px;font-size:.9rem}
+.warn-msg{background:#fff3cd;color:#856404;border:1px solid #ffc107;border-radius:6px;padding:10px 14px;margin-bottom:12px;font-size:.88rem}
+/* admin section */
+.admin-toggle{text-align:center;margin-top:16px}
+.admin-link{background:none;border:none;color:#999;cursor:pointer;font-size:.82rem;text-decoration:underline}
+.admin-link:hover{color:#4a9eda}
+.admin-key-row{display:flex;gap:8px;margin-top:8px;align-items:center}
+.admin-key-row input{flex:1}
+/* tab */
+.tab-content{display:none}
+.tab-content.active{display:block}
+/* convert */
+.conv-result{background:#fff;border:1px solid #dde;border-radius:8px;padding:20px;margin-top:16px;text-align:center}
+.conv-year{font-size:1.6rem;font-weight:bold;color:#4a9eda;margin-bottom:6px}
+.conv-disc{font-size:.78rem;color:#aaa;margin-top:8px}
+/* no-sheet notice */
+.sheet-notice{background:#e8f4fd;border:1px solid #bee3f8;border-radius:6px;padding:10px 14px;font-size:.85rem;color:#2c5282;margin-bottom:14px}
+/* message banner */
+.msg-banner{background:#fffbee;border-bottom:2px solid #e6c84a;padding:6px 16px;font-size:.88rem;color:#5a3e00;text-align:center;white-space:pre-wrap;line-height:1.4;display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}
+.msg-edit-bar{background:#f7f3e3;border-bottom:2px solid #e6c84a;padding:7px 14px;display:flex;gap:8px;align-items:center}
+.msg-edit-bar textarea{flex:1;min-height:36px;max-height:80px;font-size:.88rem;direction:rtl;font-family:inherit;padding:4px 8px}
+.msg-admin-btns{display:flex;gap:6px;justify-content:center;margin-top:5px}
+.msg-add-btn{display:block;text-align:center;padding:5px;background:#fffbee;border-bottom:1px dashed #e6c84a;color:#b8860b;font-size:.8rem;cursor:pointer;border-top:none;border-left:none;border-right:none;width:100%}
+.msg-add-btn:hover{background:#fff8d6}
+/* edit button */
+.btn-edit{background:none;border:1px solid #ccd;border-radius:4px;padding:3px 7px;cursor:pointer;font-size:.78rem;color:#888;flex-shrink:0;line-height:1}
+.btn-edit:hover{background:#f0f4ff;border-color:#4a9eda;color:#4a9eda}
+/* edit modal */
+.modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.55);z-index:1000;overflow-y:auto;padding:20px 12px}
+.modal-box{background:#fff;max-width:480px;margin:0 auto;border-radius:10px;padding:22px 20px;direction:rtl}
+.modal-box h3{color:#1a2e44;margin-bottom:14px;border-bottom:1px solid #eee;padding-bottom:8px;font-size:1rem}
+</style>
+</head>
+<body>
+<header>
+  <h1>הילולא דצדיקיא</h1>
+  <button class="lang-toggle" id="langToggle" onclick="toggleLang()">EN</button>
+</header>
+
+<!-- ── Message Banner ── -->
+<div id="msgBanner" class="msg-banner" style="display:none">
+  <span id="msgText"></span>
+  <span id="msgAdminBtns" style="display:none;gap:5px;flex-shrink:0">
+    <button class="btn-outline btn-sm" style="padding:3px 9px;font-size:.78rem" onclick="startEditMsg()">✏️</button>
+    <button class="btn-danger btn-sm" style="padding:3px 9px;font-size:.78rem" onclick="clearMsg()">✕</button>
+  </span>
+</div>
+<div id="msgEditBar" class="msg-edit-bar" style="display:none">
+  <textarea id="msgInput" placeholder="כתוב הודעה לכל המשתמשים..."></textarea>
+  <div style="display:flex;flex-direction:column;gap:6px">
+    <button class="btn btn-sm" id="msgSaveBtn" onclick="saveMsg()" data-i18n="save">שמור</button>
+    <button class="btn-outline btn-sm" onclick="cancelEditMsg()" data-i18n="cancel">ביטול</button>
+  </div>
+</div>
+<button id="msgAddBtn" class="msg-add-btn" style="display:none" onclick="startEditMsg()" data-i18n="addMessage">✏️ הוסף הודעה</button>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="showTab(0)" data-i18n="tab0">יארצייט היום</button>
+  <button class="tab-btn" onclick="showTab(1)" data-i18n="tab1">חפש / הכל</button>
+  <button class="tab-btn" onclick="showTab(2)" data-i18n="tab2">הצע / הוסף</button>
+</div>
+<div class="content">
+
+  <!-- ── TAB 0: Today ── -->
+  <div id="tab0" class="tab-content active">
+    <div class="date-box">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+        <button class="btn-outline btn-sm" id="btnYesterday" onclick="navigateDay(-1)">→ אתמול</button>
+        <span id="dayNavLabel" style="font-size:.85rem;color:#888;font-weight:bold">היום</span>
+        <button class="btn-outline btn-sm" id="btnTomorrow" onclick="navigateDay(1)">מחר ←</button>
+      </div>
+      <div class="date-big" id="todayHDate"></div>
+    </div>
+    <div id="todayList"></div>
+  </div>
+
+  <!-- ── TAB 1: Search / Show All ── -->
+  <div id="tab1" class="tab-content">
+    <div class="search-bar">
+      <div class="search-row">
+        <label data-i18n="monthLbl">חודש:</label>
+        <select id="searchMonth" onchange="onSearchChange()"></select>
+        <label data-i18n="dayLbl">יום:</label>
+        <select id="searchDay" onchange="onSearchChange()"></select>
+        <button class="btn-outline" id="showAllBtn" onclick="toggleShowAll()" data-i18n="showAll">הצג הכל</button>
+      </div>
+      <div class="name-search" id="nameSearchRow" style="display:none">
+        <input type="text" id="nameSearch" placeholder="חפש לפי שם, כינוי, ספר..." oninput="renderAll()" data-i18n-ph="searchPh">
+      </div>
+    </div>
+    <div id="searchList"></div>
+  </div>
+
+  <!-- ── TAB 2: Suggest / Add ── -->
+  <div id="tab2" class="tab-content">
+
+    <!-- Public suggestion form -->
+    <div class="form-card" id="suggestCard">
+      <h3 data-i18n="suggestH3">💡 הצע שם לרשימה</h3>
+      <div id="noSheetNotice" class="sheet-notice" style="display:none" data-i18n="noSheetNotice">
+        שליחת הצעות דורשת חיבור ל-Google Sheets. ראה הוראות הגדרה.
+      </div>
+      <form id="suggestForm" onsubmit="submitSuggestion(event)">
+        <div class="form-row">
+          <div class="form-group"><label data-i18n="monthLbl">חודש</label><select id="sugMonth"></select></div>
+          <div class="form-group"><label data-i18n="dayLbl">יום</label><select id="sugDay"></select></div>
+        </div>
+        <div class="form-group"><label data-i18n="nameLbl">שם הצדיק *</label><input type="text" id="sugName" placeholder="שם" required data-i18n-ph="namePh"></div>
+        <div class="form-group"><label data-i18n="fatherLbl">ב"ר (שם האב)</label><input type="text" id="sugFather" placeholder="שם האב" data-i18n-ph="fatherPh"></div>
+        <div class="form-group"><label data-i18n="titleLbl">כינוי / ספר</label><input type="text" id="sugTitle" placeholder="כינוי או שם הספר" data-i18n-ph="titlePh"></div>
+        <div class="form-row">
+          <div class="form-group"><label data-i18n="hYearNumLbl">שנה (מספר)</label><input type="number" id="sugHYearNum" placeholder="5786" min="1" oninput="autoHYear('sugHYearNum','sugHYear','sugGYear')"></div>
+          <div class="form-group"><label data-i18n="hYearDispLbl">עברי (אותיות)</label><input type="text" id="sugHYear" placeholder='תשפ"ו'></div>
+          <div class="form-group"><label data-i18n="gYearLbl">לועזי</label><input type="text" id="sugGYear" placeholder="2026"></div>
+        </div>
+        <div class="form-group"><label data-i18n="noteLbl">הערה (רשות)</label><textarea id="sugNote" placeholder="מקור, הערה, מידע נוסף..." data-i18n-ph="notePh"></textarea></div>
+        <button type="submit" class="btn" data-i18n="sendSuggest">שלח הצעה</button>
+      </form>
+      <div id="suggestSuccess" style="display:none" class="success" data-i18n="sugSuccessMsg">✅ ההצעה נשלחה! תודה, נבדוק אותה בהקדם.</div>
+      <div id="suggestError" style="display:none" class="error-msg" data-i18n="sugErrorMsg">⚠️ שגיאה בשליחה. נסה שוב.</div>
+    </div>
+
+    <!-- Admin section -->
+    <div class="admin-toggle">
+      <div id="adminUnlock">
+        <button class="admin-link" onclick="showAdminKeyInput()" data-i18n="adminLoginBtn">🔐 כניסת מנהל</button>
+      </div>
+      <div id="adminKeyInput" style="display:none">
+        <div class="admin-key-row">
+          <input type="password" id="keyInput" placeholder="מפתח מנהל" onkeydown="if(event.key==='Enter')saveAdminKey()" data-i18n-ph="keyPh">
+          <button class="btn btn-sm" onclick="saveAdminKey()" data-i18n="loginBtn">כניסה</button>
+          <button class="btn-outline btn-sm" onclick="cancelAdminKey()" data-i18n="cancel">ביטול</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Admin add form (only shown when key is saved) -->
+    <div id="adminAddSection" style="display:none;margin-top:16px">
+      <div class="form-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+          <h3 style="border:none;padding:0;margin:0" data-i18n="addH3">➕ הוסף צדיק (מנהל)</h3>
+          <button class="btn-danger btn-sm" onclick="logoutAdmin()" data-i18n="logoutBtn">התנתק</button>
+        </div>
+        <div id="noSheetAddNotice" class="warn-msg" style="display:none" data-i18n="noSheetWarn">
+          ⚠️ כתובת Apps Script לא הוגדרה — ההוספה תישמר רק בזיכרון הדפדפן לסשן זה.
+        </div>
+        <div style="margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid #eee;display:flex;flex-wrap:wrap;gap:8px;align-items:flex-start">
+          <button class="btn-outline btn-sm" id="populateBtn" onclick="populateSheet()" data-i18n="populateBtn">📤 העלה רשימה לגיליון Google (פעם אחת)</button>
+          <button class="btn-outline btn-sm" id="showHiddenBtn" onclick="toggleShowHidden()">👁 הצג מוסתרים</button>
+          <div style="font-size:.78rem;color:#aaa;width:100%" data-i18n="populateNote">מעלה את כל ~460 הצדיקים לטאב "כל הרשימה" בגיליון. לחץ רק פעם אחת.</div>
+        </div>
+        <form id="addForm" onsubmit="addTzaddik(event)">
+          <div class="form-row">
+            <div class="form-group"><label data-i18n="monthLbl">חודש</label><select id="addMonth" required></select></div>
+            <div class="form-group"><label data-i18n="dayLbl">יום</label><select id="addDay" required></select></div>
+          </div>
+          <div class="form-group"><label data-i18n="nameLbl">שם הצדיק *</label><input type="text" id="addName" required placeholder="שם" data-i18n-ph="namePh"></div>
+          <div class="form-group" style="display:flex;align-items:center;gap:10px;margin-top:-4px">
+            <input type="checkbox" id="addRabbi" style="width:auto;cursor:pointer" checked>
+            <label for="addRabbi" style="margin:0;cursor:pointer;font-weight:normal;font-size:.88rem" data-i18n="rabbiLbl">הוסף "רבי" לפני השם</label>
+          </div>
+          <div class="form-group"><label data-i18n="fatherLbl">ב"ר (שם האב)</label><input type="text" id="addFather" placeholder="שם האב" data-i18n-ph="fatherPh"></div>
+          <div class="form-group"><label data-i18n="titleLbl">כינוי / ספר</label><input type="text" id="addTitle" placeholder="כינוי או שם הספר" data-i18n-ph="titlePh"></div>
+          <div class="form-row">
+            <div class="form-group"><label data-i18n="hYearNumLbl">שנה (מספר)</label><input type="number" id="addHYearNum" placeholder="5786" min="1" oninput="autoHYear('addHYearNum','addHYear','addGYear')"></div>
+            <div class="form-group"><label data-i18n="hYearDispLbl">עברי (אותיות)</label><input type="text" id="addHYear" placeholder='תשפ"ו'></div>
+            <div class="form-group"><label data-i18n="gYearLbl">לועזי</label><input type="text" id="addGYear" placeholder="2026"></div>
+          </div>
+          <div class="form-group" style="display:flex;align-items:center;gap:10px;margin-top:4px">
+            <input type="checkbox" id="addPrivate" style="width:auto;cursor:pointer">
+            <label for="addPrivate" style="margin:0;cursor:pointer;font-weight:normal" data-i18n="privateLbl">🔒 רשומה פרטית (גלויה למנהל בלבד)</label>
+          </div>
+          <button type="submit" class="btn" style="margin-top:12px" data-i18n="addToList">הוסף לרשימה</button>
+        </form>
+        <div id="addSuccess" style="display:none" class="success" data-i18n="addSuccessMsg">✅ הצדיק נוסף בהצלחה!</div>
+        <div id="addError" style="display:none" class="error-msg" data-i18n="addErrorMsg">❌ שגיאה — בדוק את מפתח המנהל או החיבור לאינטרנט.</div>
+      </div>
+    </div>
+
+  </div>
+
+</div><!-- /content -->
+
+<!-- ── Edit Modal ── -->
+<div id="editModal" class="modal-overlay">
+  <div class="modal-box">
+    <h3 data-i18n="editH3">✏️ עריכת רשומה</h3>
+    <form id="editForm" onsubmit="saveEdit(event)">
+      <input type="hidden" id="editOrigKey">
+      <div class="form-row">
+        <div class="form-group"><label data-i18n="monthLbl">חודש</label><select id="editMonth" style="width:100%"></select></div>
+        <div class="form-group"><label data-i18n="dayLbl">יום</label><select id="editDay" style="width:100%"></select></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label data-i18n="hYearNumLbl">שנה (מספר)</label><input type="number" id="editHYearNum" placeholder="5786" min="1" oninput="autoHYear('editHYearNum','editHYear','editGYear')"></div>
+        <div class="form-group"><label data-i18n="hYearDispLbl">עברי (אותיות)</label><input type="text" id="editHYear" placeholder='תשפ"ו'></div>
+        <div class="form-group"><label data-i18n="gYearLbl">לועזי</label><input type="text" id="editGYear" placeholder="2026"></div>
+      </div>
+      <div class="form-group"><label data-i18n="nameLbl">שם הצדיק *</label><input type="text" id="editName" required></div>
+      <div class="form-group" style="display:flex;align-items:center;gap:10px;margin-top:-4px">
+        <input type="checkbox" id="editRabbi" style="width:auto;cursor:pointer" checked>
+        <label for="editRabbi" style="margin:0;cursor:pointer;font-weight:normal;font-size:.88rem" data-i18n="rabbiLbl">הוסף "רבי" לפני השם</label>
+      </div>
+      <div class="form-group"><label data-i18n="fatherLbl">ב"ר (שם האב)</label><input type="text" id="editFather"></div>
+      <div class="form-group"><label data-i18n="titleLbl">כינוי / ספר</label><input type="text" id="editTitle"></div>
+      <div class="form-group" style="display:flex;align-items:center;gap:10px">
+        <input type="checkbox" id="editPrivate" style="width:auto;cursor:pointer">
+        <label for="editPrivate" style="margin:0;cursor:pointer;font-weight:normal" data-i18n="privateShort">🔒 רשומה פרטית</label>
+      </div>
+      <div style="display:flex;gap:10px;margin-top:16px;flex-wrap:wrap">
+        <button type="submit" class="btn" id="editSaveBtn" data-i18n="saveChanges">שמור שינויים</button>
+        <button type="button" class="btn-outline" onclick="closeEdit()" data-i18n="cancel">ביטול</button>
+      </div>
+    </form>
+    <div id="editError" style="display:none;margin-top:10px" class="error-msg" data-i18n="editErrorMsg">❌ שגיאה בשמירה, נסה שוב.</div>
+  </div>
+</div>
+
+<script>
+// ════════════════════════════════════════════════════════════════════
+// CONFIG — paste your Apps Script deployment URL here after setup
+// ════════════════════════════════════════════════════════════════════
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxwtSyCQ2S0tdQOLGHg9umysTIaQJZqdBIQCKX7qHY-hO3XMYTs-T-UNdOUQ8f7IVEM/exec'; // e.g. 'https://script.google.com/macros/s/XXXXX/exec'
+
+// ── Language / i18n ──────────────────────────────────────────────────
+let lang = localStorage.getItem('hilula_lang') || 'he';
+
+const TRANSLATIONS = {
+  he: {
+    tab0:'יארצייט היום', tab1:'חפש / הכל', tab2:'הצע / הוסף',
+    yesterday:'→ אתמול', tomorrow:'מחר ←', today:'היום', days:'ימים',
+    tzaddikim:'צדיקים', noToday:'אין יארצייט הרשום להיום',
+    monthLbl:'חודש:', dayLbl:'יום:',
+    showAll:'הצג הכל', searchByDate:'חפש לפי תאריך',
+    searchPh:'חפש לפי שם, כינוי, ספר...',
+    noDateRes:'לא נמצאו רשומות לתאריך זה', noResults:'לא נמצאו תוצאות',
+    suggestH3:'💡 הצע שם לרשימה',
+    noSheetNotice:'שליחת הצעות דורשת חיבור ל-Google Sheets. ראה הוראות הגדרה.',
+    nameLbl:'שם הצדיק *', fatherLbl:'ב"ר (שם האב)', titleLbl:'כינוי / ספר',
+    hYearLbl:'שנה עברית', hYearNumLbl:'שנה (מספר)', hYearDispLbl:'עברי (אותיות)', gYearLbl:'שנה לועזית', noteLbl:'הערה (רשות)',
+    namePh:'שם', fatherPh:'שם האב', titlePh:'כינוי או שם הספר', notePh:'מקור, הערה, מידע נוסף...',
+    sendSuggest:'שלח הצעה',
+    sugSuccessMsg:'✅ ההצעה נשלחה! תודה, נבדוק אותה בהקדם.',
+    sugErrorMsg:'⚠️ שגיאה בשליחה. נסה שוב.',
+    adminLoginBtn:'🔐 כניסת מנהל', keyPh:'מפתח מנהל', loginBtn:'כניסה', cancel:'ביטול',
+    addH3:'➕ הוסף צדיק (מנהל)', logoutBtn:'התנתק',
+    noSheetWarn:'⚠️ כתובת Apps Script לא הוגדרה — ההוספה תישמר רק בזיכרון הדפדפן לסשן זה.',
+    populateBtn:'📤 העלה רשימה לגיליון Google (פעם אחת)',
+    populateNote:'מעלה את כל ~460 הצדיקים לטאב "כל הרשימה" בגיליון. לחץ רק פעם אחת.',
+    privateLbl:'🔒 רשומה פרטית (גלויה למנהל בלבד)', privateShort:'🔒 רשומה פרטית',
+    addToList:'הוסף לרשימה',
+    addSuccessMsg:'✅ הצדיק נוסף בהצלחה!',
+    addErrorMsg:'❌ שגיאה — בדוק את מפתח המנהל או החיבור לאינטרנט.',
+    editH3:'✏️ עריכת רשומה', saveChanges:'שמור שינויים',
+    editErrorMsg:'❌ שגיאה בשמירה, נסה שוב.',
+    addMessage:'✏️ הוסף הודעה', msgPh:'כתוב הודעה לכל המשתמשים...',
+    save:'שמור',
+    confirmDelete:'למחוק רשומה זו?',
+    confirmPopulate:'להעלות את כל הרשימה (~460 צדיקים) לגיליון Google?\nהכרטיסייה "כל הרשימה" תיכתב מחדש.',
+    confirmClearMsg:'למחוק את ההודעה?',
+    enterName:'יש להזין שם', saveError:'שגיאה בשמירה', wrongPassword:'סיסמה שגויה, נסה שוב',
+    navYest:'אתמול', navTomr:'מחר',
+    sending:'...שולח', sent:'✅ נשלח!',
+    saving:'...שומר', uploading:'...מעלה', uploadedOk:'✅ הועלו',
+    rabbiLbl:'הוסף "רבי" לפני השם',
+    showHiddenBtn:'👁 הצג מוסתרים', hideHiddenBtn:'הסתר מוסתרים', restore:'שחזר'
+  },
+  en: {
+    tab0:"Today's Yahrtzeit", tab1:'Search / All', tab2:'Suggest / Add',
+    yesterday:'← Yesterday', tomorrow:'Tomorrow →', today:'Today', days:'days',
+    tzaddikim:'Tzaddikim', noToday:'No yahrtzeit recorded for today',
+    monthLbl:'Month:', dayLbl:'Day:',
+    showAll:'Show All', searchByDate:'Search by Date',
+    searchPh:'Search by name, title, book...',
+    noDateRes:'No entries found for this date', noResults:'No results found',
+    suggestH3:'💡 Suggest a Name',
+    noSheetNotice:'Suggestions require a Google Sheets connection. See setup instructions.',
+    nameLbl:'Tzaddik Name *', fatherLbl:'Son of (father\'s name)', titleLbl:'Title / Book',
+    hYearLbl:'Hebrew Year', hYearNumLbl:'Year (number)', hYearDispLbl:'Hebrew (letters)', gYearLbl:'Gregorian Year', noteLbl:'Note (optional)',
+    namePh:'Name', fatherPh:"Father's name", titlePh:'Title or book name', notePh:'Source, note, additional info...',
+    sendSuggest:'Send Suggestion',
+    sugSuccessMsg:"✅ Suggestion sent! Thank you, we'll review it soon.",
+    sugErrorMsg:'⚠️ Error sending. Please try again.',
+    adminLoginBtn:'🔐 Admin Login', keyPh:'Admin password', loginBtn:'Login', cancel:'Cancel',
+    addH3:'➕ Add Tzaddik (Admin)', logoutBtn:'Logout',
+    noSheetWarn:'⚠️ Apps Script URL not configured — entry will only be saved in browser memory for this session.',
+    populateBtn:'📤 Upload list to Google Sheet (once)',
+    populateNote:'Uploads all ~460 tzaddikim to the sheet. Click only once.',
+    privateLbl:'🔒 Private entry (admin only)', privateShort:'🔒 Private entry',
+    addToList:'Add to List',
+    addSuccessMsg:'✅ Tzaddik added successfully!',
+    addErrorMsg:'❌ Error — check admin password or internet connection.',
+    editH3:'✏️ Edit Entry', saveChanges:'Save Changes',
+    editErrorMsg:'❌ Error saving, please try again.',
+    addMessage:'✏️ Add Message', msgPh:'Write a message for all users...',
+    save:'Save',
+    confirmDelete:'Delete this entry?',
+    confirmPopulate:'Upload the full list (~460 tzaddikim) to Google Sheet?\nThe "Full List" tab will be overwritten.',
+    confirmClearMsg:'Delete this message?',
+    enterName:'Please enter a name', saveError:'Error saving', wrongPassword:'Wrong password, please try again',
+    navYest:'Yesterday', navTomr:'Tomorrow',
+    sending:'...Sending', sent:'✅ Sent!',
+    saving:'...Saving', uploading:'...Uploading', uploadedOk:'✅ Uploaded',
+    rabbiLbl:'Add "Rabbi" prefix before name',
+    showHiddenBtn:'👁 Show Hidden', hideHiddenBtn:'Hide Hidden', restore:'Restore'
+  }
+};
+
+function T(key){ return (TRANSLATIONS[lang]||TRANSLATIONS.he)[key] || TRANSLATIONS.he[key] || key; }
+
+function applyLang(){
+  const isEN = lang==='en';
+  document.documentElement.dir = isEN ? 'ltr' : 'rtl';
+  document.documentElement.lang = lang;
+  document.getElementById('langToggle').textContent = isEN ? 'עב' : 'EN';
+  // Update all data-i18n elements
+  document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = T(el.dataset.i18n); });
+  // Update placeholders
+  document.querySelectorAll('[data-i18n-ph]').forEach(el => { el.placeholder = T(el.dataset.i18nPh); });
+  // Update message textarea placeholder
+  document.getElementById('msgInput').placeholder = T('msgPh');
+  // Nav buttons need arrows flipped
+  document.getElementById('btnYesterday').textContent = T('yesterday');
+  document.getElementById('btnTomorrow').textContent  = T('tomorrow');
+  // Toggle button on showAll
+  const showAllBtn = document.getElementById('showAllBtn');
+  if(showAllBtn) showAllBtn.textContent = showAllMode ? T('searchByDate') : T('showAll');
+  // Re-render dynamic content
+  renderToday(); renderSearch();
+}
+
+function toggleLang(){
+  lang = lang==='he' ? 'en' : 'he';
+  localStorage.setItem('hilula_lang', lang);
+  applyLang();
+}
+
+// ── Hebrew Calendar Algorithm (molad-based) ──────────────────────────
+const HEPOCH = 347997;
+function isHLeap(y){return (7*y+1)%19<7}
+function hElapsed(y){
+  const m=235*Math.floor((y-1)/19)+12*((y-1)%19)+Math.floor(((y-1)%19*7+1)/19);
+  const p=204+793*(m%1080);
+  const h=5+12*m+793*Math.floor(m/1080)+Math.floor(p/1080);
+  const parts=1080*(h%24)+(p%1080);
+  let d=1+29*m+Math.floor(h/24);
+  if(parts>=19440||(d%7===2&&parts>=9924&&!isHLeap(y))||(d%7===1&&parts>=16789&&isHLeap(y-1)))d++;
+  if(d%7===0||d%7===3||d%7===5)d++;
+  return d;
+}
+function hYearDays(y){return hElapsed(y+1)-hElapsed(y)}
+function longCheshvan(y){return hYearDays(y)%10===5}
+function shortKislev(y){return hYearDays(y)%10===3}
+function daysInHMonth(m,y){
+  if([1,3,5,7,11].includes(m))return 30;
+  if([2,4,6,10].includes(m))return 29;
+  if(m===8)return longCheshvan(y)?30:29;
+  if(m===9)return shortKislev(y)?29:30;
+  if(m===12)return isHLeap(y)?30:29;
+  if(m===13)return 29;
+  return 29;
+}
+function gregToJD(yr,mo,dy){
+  const a=Math.floor((14-mo)/12),y=yr+4800-a,m2=mo+12*a-3;
+  return dy+Math.floor((153*m2+2)/5)+365*y+Math.floor(y/4)-Math.floor(y/100)+Math.floor(y/400)-32045;
+}
+function jdToHebrew(jd){
+  let year=Math.floor((jd-HEPOCH)*98496.0/35975351.0);
+  year=Math.max(1,year);
+  while(HEPOCH+hElapsed(year+1)<=jd)year++;
+  while(HEPOCH+hElapsed(year)>jd)year--;
+  const yearStart=HEPOCH+hElapsed(year);
+  let dayOfYear=jd-yearStart+1;
+  const mo=[7,8,9,10,11,12];
+  if(isHLeap(year))mo.push(13);
+  mo.push(1,2,3,4,5,6);
+  let month=7;
+  for(let i=0;i<mo.length;i++){
+    const mm=mo[i],days=daysInHMonth(mm,year);
+    if(dayOfYear<=days){month=mm;break;}
+    dayOfYear-=days;
+  }
+  return{year,month,day:dayOfYear};
+}
+function todayHebrew(){
+  const n=new Date();
+  return jdToHebrew(gregToJD(n.getFullYear(),n.getMonth()+1,n.getDate()));
+}
+
+// ── Hebrew letter helpers ─────────────────────────────────────────────
+const H_ONES=['','א','ב','ג','ד','ה','ו','ז','ח','ט'];
+const H_TENS=['','י','כ','ל','מ','נ','ס','ע','פ','צ'];
+const H_HUND=['','ק','ר','ש','ת','תק','תר','תש','תת','תתק'];
+function dayToHeb(n){
+  if(n<=0||n>30)return'';
+  if(n===15)return'טו';if(n===16)return'טז';
+  return H_TENS[Math.floor(n/10)]+H_ONES[n%10];
+}
+function numToHebLetters(n){
+  if(n<=0)return'';
+  let r=H_HUND[Math.floor(n/100)];
+  const rem=n%100;
+  if(rem===15)return r+'טו';if(rem===16)return r+'טז';
+  return r+H_TENS[Math.floor(rem/10)]+H_ONES[rem%10];
+}
+function hebrewYearStr(year){
+  const s=numToHebLetters(year%1000);
+  if(!s)return'';
+  return s.length===1?s+"'":s.slice(0,-1)+'"'+s.slice(-1);
+}
+function addGershayim(s){
+  if(!s||!s.trim())return s;
+  s=s.trim().replace(/['"]/g,'');
+  if(!s)return s;
+  return s.length===1?s+"'":s.slice(0,-1)+'"'+s.slice(-1);
+}
+
+// ── Month / Day data ──────────────────────────────────────────────────
+const MONTH_NAMES={1:'ניסן',2:'אייר',3:'סיון',4:'תמוז',5:'אב',6:'אלול',7:'תשרי',8:'חשון',9:'כסליו',10:'טבת',11:'שבט',12:'אדר',13:'אדר ב'};
+const MONTHS_LIST=['תשרי','חשון','כסליו','טבת','שבט','אדר','אדר ב','ניסן','אייר','סיון','תמוז','אב','אלול'];
+const DAYS_LIST=['א','ב','ג','ד','ה','ו','ז','ח','ט','י','יא','יב','יג','יד','טו','טז','יז','יח','יט','כ','כא','כב','כג','כד','כה','כו','כז','כח','כט','ל'];
+const MONTH_SORT={};
+MONTHS_LIST.forEach((m,i)=>MONTH_SORT[m]=i);
+
+// ── CSV parser ────────────────────────────────────────────────────────
+function parseCSV(text){
+  const lines=text.split(/\r?\n/);const result=[];
+  for(const line of lines){
+    if(!line.trim())continue;
+    const fields=[];let i=0;
+    while(i<=line.length){
+      if(i===line.length){fields.push('');break;}
+      if(line[i]==='"'){
+        let field='';i++;
+        while(i<line.length){
+          if(line[i]==='"'&&line[i+1]==='"'){field+='"';i+=2;}
+          else if(line[i]==='"'){i++;break;}
+          else field+=line[i++];
+        }
+        fields.push(field);
+        if(i<line.length&&line[i]===',')i++;
+      }else{
+        let field='';
+        while(i<line.length&&line[i]!==',')field+=line[i++];
+        fields.push(field);if(i<line.length)i++;
+      }
+    }
+    result.push(fields);
+  }
+  return result;
+}
+
+// ── Embedded CSV ──────────────────────────────────────────────────────
+const CSV_DATA=`ID,חודש,יום,עברי,לועזי,הרב רבי,"ב""ר",כינוי
+101,תשרי,א,תרמ,1879,מאיר לייבוש,יחיאל מיכל,המלבים
+102,תשרי,ב,תרפב,1921,ישראל,אשר,הינוקא מסטולין
+103,תשרי,ג,תרכא,1860,ישראל,גדליה,תפארת ישראל
+103,תשרי,ג,תרץ,1929,נפתלי צבי,משה,חידושי הגרנט
+103,תשרי,ג,תרץ,1929,שמעון נתן נטע,דוד שלמה צבי,האדמור מלעלוב
+104,תשרי,ד,תעד,1713,יואל,משה,ר יואל בעל שם מאוסטרהא
+104,תשרי,ד,תקפא,1820,אברהם,יחיאל,חיי אדם
+104,תשרי,ד,תרח,1847,יצחק אריה,מתיתיהו,הבעל שם ממיכלשטאט
+106,תשרי,ו,תקעב,1811,אריה ליב,ברוך,הסבא משפולי
+108,תשרי,ח,תקצג,1832,נח,מרדכי,אדמור מלעכוויטש
+109,תשרי,ט,תשכ,1959,יצחק זאב,חיים,הרב מבריסק
+110,תשרי,י,תשלז,1976,משה יצחק,נפתלי אלימלך,ר איציקל מפשעווארסק
+112,תשרי,יב,תקלז,1776,אברהם,דב בער,רבי אברהם המלאך בן המגיד
+113,תשרי,יג,תקצח,1837,עקיבא,משה,"ר""ע איגר מפוזנא"
+113,תשרי,יג,תרמג,1882,שמואל,מנחם מענדל,צמח צדק מחבד
+113,תשרי,יג,תרסז,1906,ישראל,אברהם יעקב,אדמור מסדיגורא
+113,תשרי,יג,תשנח,1998,שלום,חיים יעקב,מקומרנא (הדסה)
+114,תשרי,יד,שנד,1593,משה,חיים,האלשייך
+114,תשרי,יד,תקסג,1802,שלום שכנא,אברהם,פרוהבישט
+114,תשרי,יד,תקעה,1814,ישראל,שבתאי,המגיד מקאזניץ
+114,תשרי,יד,תשט,1948,יוסף צבי,ישראל,מוהריץ דושינסקיא
+115,תשרי,טו,תרנה,1894,מרדכי,יששכר בער,אדמור מנדבורנא
+115,תשרי,טו,תרפו,1925,מאיר,אהרון יהודה,ר מאיר אריק
+116,תשרי,טז,תרעד,1913,צבי הירש,שלמה,אדמור ממונקאטש ב דרכי תשובה
+118,תשרי,יח,תקסב,1801,משולם,שמשון,ר משולם אגרא
+118,תשרי,יח,תקעא,1810,נחמן,שמחה,ר נחמן מברסלב
+119,תשרי,יט,תקנח,1797,אליהו,שלמה זלמן,הגאון מוילנא
+119,תשרי,יט,תקעד,1813,יעקב יצחק,אשר,היהודי הקדוש מפשיסחא
+119,תשרי,יט,תרעג,1912,אהרון,ישראל,אדמור מסדיגורא
+120,תשרי,כ,תכד,1663,אברהם יהושוע העשיל,יעקב,חנוכת התורה
+120,תשרי,כ,תקנא,1790,יעקב יוסף,יהודה לייב,רב ייבי מאוסטראה
+120,תשרי,כ,תקפח,1827,אליעזר,יצחק,הפלא יועץ
+121,תשרי,כא,תקלא,1770,מנחם מענדל,אליעזר,אדמור מפרמישלאן
+121,תשרי,כא,תרסד,1903,דוד משה,ישראל,אדמור מטשורקוב
+121,תשרי,כא,תשכב,1961,אברהם שמואל,עקיבא,חשב סופר
+121,תשרי,כא,תשכז,1966,משה יעקב,יוסף,הסנדלר
+124,תשרי,כד,תקמב,1781,יעקב יוסף,צבי,מפולנאה ב התולדות
+124,תשרי,כד,תרלה,1874,אליהו,שלמה,גוטמאכר מגריידיץ
+124,תשרי,כד,תרמה,1884,אברהם יהודה אריה לייב,פנחס זעליג,הקול אריה
+124,תשרי,כד,תשנו,1995,חיים זאנוויל,משה,האדמור מריבניץ
+124,תשרי,כד,תשסח,2007,אליעזר מנוח,שלמה יהודה לייב,פלצינסקי
+125,תשרי,כה,תקנה,1794,"יו""ט ליפמן",אברהם שמואל,"ב קדושת יו""ט ומלאכת יו""ט"
+125,תשרי,כה,תקע,1809,לוי יצחק,מאיר,קדושת לוי
+125,תשרי,כה,תר,1839,משה,שמואל,החתם סופר
+126,תשרי,כו,תקעז,1816,אהרון,מרדכי,ב תולדות אהרון מז'יטומיר
+126,תשרי,כו,תקפז,1826,אשר,אהרון,אדמור מסטולין בן ר אהרון הגדול מקרלין
+127,תשרי,כז,תקב,1741,אלעזר,שמואל,בעל הרוקח
+129,תשרי,כט,תרא,1840,אברהם דוד,אשר אנשיל,האשל אברהם מבוטשטש
+129,תשרי,כט,תרמה,1884,מנחם מענדל,חיים,צמח צדיק מויזניץ (בן קאסוב)
+129,תשרי,כט,תרפד,1923,שמואל צבי,יחיאל,דנציגר התפארת שמואל מאלכסנדר
+201,חשון,א,תרלח,1877,יששכר בעריש,משה אהרון,עבודת יששכר מוולברוז
+201,חשון,א,תרפ,1919,יוסף,יהודה,ענגיל ב אתוון דאורייתא
+202,חשון,ב,תשנג,1992,אלעזר שמחה,אלחנן בונים,"וסרמן ר""י אור אלחנן"
+203,חשון,ג,תריא,1850,ישראל,שלום שכנא,הרוזינר
+203,חשון,ג,תרכא,1860,אליעזר,נפתלי צבי,אדמור מדזיקוב
+203,חשון,ג,תרכו,1865,יוסף זונדל,בנימין בייניש,מסלנט
+203,חשון,ג,תש,1939,יצחק זעליג,חיים ישראל,אדמור מקאצק סוקולוב
+203,חשון,ג,תשעד,2013,עובדיה,יעקב,חזון עובדיה ויביע אומר
+204,חשון,ד,תשג,1942,שמחה זעליג,דובער ריגער,מבריסק
+204,חשון,ד,תשד,1943,קלונימוס קלמן,אלימלך,"ב חובת התלמידים בן ר""א מגרודזיסק"
+204,חשון,ד,תשכח,1967,יעקב,סיני,האדמור מטשאקאווע
+206,חשון,ו,תסא,1700,יהודה החסיד,,מייסד ביהכנ החורבה
+207,חשון,ז,תרצד,1933,יהודה מאיר,יעקב שמשון,"ר""מ שפירא מלובלין מייסד הדף היומי"
+208,חשון,ח,תרמ,1879,נחום (נחומק'ה),עוזיאל,החסיד מהורדנא
+209,חשון,ט,פח,1327,אשר,יחיאל,רבינו הראש
+209,חשון,ט,תריב,1851,יצחק,אהרון,מקרלין ב קרן אורה
+209,חשון,ט,תש,1939,שמעון יהודה,יצחק שמואל,ב שערי יושר
+210,חשון,י,תשכו,1939,דב בעריש,יעקב,דובב משרים מטשעבין
+211,חשון,יא,תקנח,1797,מנחם נחום,צבי,ב מאור עיניחם אדמור מטשרנוביל
+211,חשון,יא,תרמד,1883,אברהם,יצחק מתיתיהו,יסוד העבודה מסלונים
+211,חשון,יא,תרעט,1918,דוד שלמה,נח נפתלי,אדמור מקאברין
+211,חשון,יא,תשעב,2011,נתן צבי,אליהו מאיר,"ר""י מיר"
+212,חשון,יב,תקמט,1788,זאב וואלף,אברהם קיצעס,"תלמיד הבעש""ט"
+212,חשון,יב,תרכו,1865,נחום,אברהם,משאדיק
+214,חשון,יד,תשג,1942,אברהם אלימלך,ישראל,"אדמו""ר מסטולין קרלין הי""ד"
+215,חשון,טו,תקצז,1836,לייב בעל הייסורים,,צפת
+215,חשון,טו,תשיד,1953,אברהם ישעיהו,שמריהו יוסף קרליץ,החזון איש
+216,חשון,טז,תשסב,2001,אלעזר מנחם מן,עזריאל,הרב שך ב האבי עזרי
+217,חשון,יז,תקפו,1825,מנחם מענדל,יעקב קאפל,מקאסוב
+218,חשון,יח,תשיז,1956,יעקב,יצחק,האדמור מהוסיאטין
+218,חשון,יח,תשמז,1986,נחום,אריה צבי,"פרצוביץ ר""י מיר"
+219,חשון,יט,תשעח,2017,דב בעריש,צבי יחזקאל,ר דב יפה
+220,חשון,כ,ד תתקיט,1158,אברהם,יצחק,בעל האשכול
+220,חשון,כ,תשמג,1982,משה נתן נטע,מנחם מענדל,אבד מאקווא
+220,חשון,כ,תשמד,1983,מרדכי,יהודה,הרב שרעבי
+222,חשון,כב,תקעד,1813,דוד שלמה,ירחמיאל,ב לבושי שרד וערבי נחל
+222,חשון,כב,תקעט,1818,עזריאל,דב,מלובלין ב ראש הברזל
+222,חשון,כב,תרפז,1826,יששכר דב,יהושוע,אדמור מבעלז
+224,חשון,כד,תד,1643,אברהם,מרדכי אזולאי,ב חסד לאברהם
+224,חשון,כד,תרלא,1870,צבי,אליהו גוטמכער,
+224,חשון,כד,תשי,1949,גדליה משה,שלמה,האדמור מזוויעהל
+227,חשון,כז,תשנט,1998,יעקב,דוד יצחק לייזר,האדמור מפשעווארסק ר' יענקל
+228,חשון,כח,ה כד,1263,יונה,אברהם מגירונדי,ב שערי תשובה
+229,חשון,ל,תרז,1846,צבי הירש,יהודה לייב,מרימינוב
+300,כסליו,א,שיט,1558,שלום שכנא,יוסף מלובלין,"חותן הרמ""א"
+301,כסליו,א,תסד,1703,יוסף שמואל,צבי,ב מסורת השס
+302,כסליו,ב,תשכ,1959,עקיבא,שמחה בונים,הדעת סופר
+302,כסליו,ב,תר,1839,שמעיה,אברהם,ר שמעי' חסיד
+302,כסליו,ב,תשכג,1962,אהרון,שניאור זלמן קוטלר,"ר""י ליקווד"
+302,כסליו,ב,תקנה,1794,משולם פייביש,אהרן משה,יושר דברי אמת
+,כסליו,ב,תריח,1857,ישראל יצחק,דב בער מראדושיץ,
+302,כסליו,ב,תשנט,1998,נתן מאיר,וואכעפויגל,משגיח ישיבת לייקווד
+304,כסליו,ד,תרלח,1877,יעקב דוד,ישראל יצחק,האדמור מאמשינוב
+305,כסליו,ה,"שצ""ב",1631,שמואל אליעזר,יהודה,"המהרש""א"
+305,כסליו,ה,תש,1939,ברוך בער,שמואל דוד,ב ברכת שמואל
+308,כסליו,ח,תשג,1942,דוד,שמואל,האדמור מסוכוטשוב
+309,כסליו,ט,תקפח,1827,דב בער,שניאור זלמן,האדמור האמצעי
+309,כסליו,ט,תקצח,1837,משה,פנחס,מקאריץ
+310,כסליו,י,תרצד,1933,משה מרדכי,צבי חיים עפשטיין,"ר""י חברון ב לבושי מרדכי"
+310,כסליו,י,תשיד,1953,איסר זלמן,ברוך פרץ מלצר,אבן האזל
+311,כסליו,יא,תקמו,1785,שמחה,צבי חריף מפוזנא,ב הגהות השס
+312,כסליו,יב,שלד,1573,שלמה,יחיאל לוריא,המהרשל מלובלין
+312,כסליו,יב,תרא,1840,אברהם דב,דוד מאווריטש,הבת עין
+313,כסליו,יג,תריח,1857,שלמה זלמן יוסף,אברהם פרענקעל,מוויעליפאלי
+313,כסליו,יג,תרצד,1933,ישראל,דוד משה פרידמן,מטשורטקוב
+313,כסליו,יג,ד רס,499,רבינא רב אבינא בריה,דרב הונא,מסדר התלמוד
+313,כסליו,יג,תרפא,1920,ישראל,שמואל אליהו,הדברי ישראל ממודזיץ
+314,כסליו,יד,תיח,1657,מנשה,יוסף,מאמסטרדם ב נשמת חיים
+314,כסליו,יד,תרכט,1868,מנחם נחום,ישראל מרוזין,האדמור משטפנשט
+314,כסליו,יד,תרפא,1920,דוד,מסעוד אבוחצירא,"הי""ד ב פתח האוהל"
+315,כסליו,טו,תרסז,1906,שמחה בונים,אברהם שמואל בנימין,ב שבט סופר
+316,כסליו,טו,ג תתקנד,193,רבי יהודה הנשיא,בן רבן שמעון בן גמליאל הנשיא,
+316,כסליו,טז,תרעח,1917,מנחם,יעקב דוד,מאמשינוב
+316,כסליו,טז,תשח,1947,שאול ידידה אלעזר,ישראל,האמרי שאול ממודזיץ
+317,כסליו,יז,תרפא,1920,יוסף יוזל,שלמה זלמן,הסבא מנוברדוק
+318,כסליו,יח,ד תתקצח,1237,אברהם,בן הרמבם,
+318,כסליו,יח,תקעב,1811,ברוך,יחיאל מיכל,"ממז'יבוז נכד הבעש""ט"
+319,כסליו,יט,תקלג,1772,דב בער,אברהם,המגיד ממעזריטש
+320,כסליו,כ,תקנה,1794,משולם פייבוש,אהרון משה,מזבריז ב הדרך אמת
+320,כסליו,כ,תריח,1857,ישראל יצחק,יששכר בער,האדמור מראדושיץ
+320,כסליו,כ,תשמא,1980,יצחק,חיים יואל הוטנר,פחד יצחק
+320,כסליו,כ,תשמב,1981,יוחנן,דוד,האדמור מרחמסטריווקה
+321,כסליו,כא,תשטז,1955,יוחנן,ישראל מקרלין,האדמור מסטולין
+321,כסליו,כא,תשכא,1960,צבי פסח,יהודה לייב פראנק,ראבד ירושלים
+322,כסליו,כב,תרץ,1929,יחזקאל,משה,מדעעש ב הכנסת יחזקאל
+322,כסליו,כב,תשנח,1997,שלום מרדכי,יצחק שבדרון,
+324,כסליו,כד,תרסה,1904,חיים חזקיהו,רפאל מדיני,השדי חמד
+324,כסליו,כד,תשעח,2017,אהרון יהודה לייב,נח צבי שטיינמן,איילת השחר
+325,כסליו,כה,תקיט,1758,שלמה זלמן,ישככר בער מוילנא,"אבי הגר""א"
+325,כסליו,כה,תקסט,1808,אברהם,אליהו,"בן הגר""א"
+325,כסליו,כה,תרלב,1871,יעקב יוקב,אהרון,הערוך לנר
+325,כסליו,כה,תשנט,1998,יוחנן,מרדכי דוד,האדמור מטאלנא
+327,כסליו,כז,תקעג,1812,חיים,שלמה מטשערנוביץ,ב באר מים חיים וסידורו של שבת
+327,כסליו,כז,תשנז,1996,אברהם יצחק,אהרון דוד,האדמור מתולדות אהרון
+329,כסליו,כט,תרסו,1905,שלמה,ישראל משה,ב החשק שלמה מוילנא
+329,כסליו,כט,תשט,1948,ישראל,מרדכי שרגא פייבוש,האדמור מהוסיאטין
+400,טבת,א,,,מאיר בעל הנס,,הילולא - מנהג להדליק נר לכבודו
+401,טבת,א,תסב,1701,יאיר חיים,משה שמשון בכרך,החוות יאיר
+401,טבת,כד,תשעז,2017,משה,יצחק מאיר שפירא,ר משה שפירא
+402,טבת,ב,רסט,1508,יצחק,יהודה אברבנאל,
+403,טבת,ג,תשלט,1978,חיים לייב,רפאל אלתר שמולאביץ,"ר""י מיר"
+404,טבת,ד,תרנא,1890,גרשון העניך,יעקב ליינר,האדמור מרדמיזין ב התכלת
+404,טבת,ד,תרצג,1933,חיים שאול,אליהו הכהן דוויק,
+405,טבת,ה,תשכא,1960,אברהם יעקב,ישראל פרידמן,האדמור מסדיגורא
+406,טבת,ו,תרנט,1898,יחזקאל שרגא,חיים האלברשטם,משינאווא ב הדברי יחזקאל
+406,טבת,ו,תרצג,1933,אלתר ישראל שמעון,יעקב פרלוב,האדמור מנובומינסק
+407,טבת,ז,תקמא,1781,צבי הירש,דוד מקאמינקא,"תלמיד הבעש""ט"
+407,טבת,ז,תריד,1854,מרדכי יוסף,יעקב ליינר,האדמור מאזביצא ב המי שילוח
+408,טבת,ח,תשג,1942,יחזקאל,מאיר יחיאל הולצשטוק,האדמור מאוסטרובצא
+410,טבת,י,תרה,1844,נתן,נפתלי,מברסלב ב ליקוטי הלכות
+411,טבת,יא,תריב,1852,שלמה,עקיבא איגר,"ב גליון מהרש""א"
+411,טבת,יא,תרעג,1912,יהושוע,מאיר,האדמור מדזי'קוב ב העטרת ישועה
+412,טבת,יב,תקסו,1806,משה,יצחק,מפשעווארסק ב הפני משה
+412,טבת,יב,תשיד,1953,חיים מרדכי,יהודה לייב,האדמור מסלונים ב המאמר מרדכי
+413,טבת,יג,תריא,1850,משה,דוד,האדמור מלעלוב
+414,טבת,יג,תשא,1940,מנחם מענדל,ישראל האגער,מווישאווא בעל השארית מנחם
+414,טבת,יד,תשסא,2001,אלתר אלעזר מנחם,משה מרדכי,האדמור מלעלוב
+415,טבת,טו,תשלח,1977,חיים מרדכי,איתמר,האדמור מנדבורנא בב
+416,טבת,טז,תשסב,2001,חיים,אברהם יוסף,קרייזווירטה גאבד אנטוורפן
+417,טבת,יז,תקסא,1801,יעקב,זאב,המגיד מדובנא
+417,טבת,יז,תרו,1846,אריה לייבוש,חיים ליפשיץ,ב אריה דבי עילאי
+418,טבת,יח,תרא,1841,צבי אלימלך,פסח שפירא,ב הבני יששכר
+419,טבת,יט,תקעג,1812,אריה לייב,יוסף הכהן העלר,ב הקצות החושן
+419,טבת,יט,תרלב,1871,אברהם שמואל בנימין,משה סופר,הכתב סופר
+420,טבת,כ,ד תתקסה,1205,משה,מיימון,הרמבם
+420,טבת,כ,תרמ,1880,יעקב,מסעוד אבוחצירא,האביר יעקב
+421,טבת,כא,תקל,1770,אריה לייב,יחיאל מיכל,מוכיח מפולנאה
+421,טבת,כא,תקעד,1814,ישראל אברהם,משולם זושא מאניפולי,
+421,טבת,כא,תרי,1850,ישראל דב בער,יוסף,ב השארית יוסף מואלדוניק בעל הידית
+422,טבת,כב,תשיח,1958,שלום,מרדכי יוסף משה,האדמור משאץ לונדון
+424,טבת,כד,תעט,1719,נפתלי,יצחק כץ,ב הסמיכת חכמים
+424,טבת,כד,תקעג,1812,שניאור זלמן,ברוך,בעל התניא
+424,טבת,כד,תרפו,1926,שמואל,אברהם,השם משמואל מסוכטשוב
+424,טבת,כד,תשיד,1953,אליהו אליעזר,ראובן דב דסלר,המכתב מאליהו
+424,טבת,כד,תשמז,1987,משה מרדכי,שמעון נתן נטע,האדמור מלעלוב
+425,טבת,כה,תקצח,1838,משה צבי,שמעון שלמה,רבי משה צבי גוטרמן מסאווראן
+426,טבת,כו,תר,,יששכר בער,אהרון אריה מפרמישלאן,
+426,טבת,כו,תקעה,1816,אברהם חיים,גדליה,האדמור מזלאטשוב ב אורח לחיים
+427,טבת,כז,תרמט,,שמשון רפאל הירש,רפאל,
+429,טבת,כט,תרנח,1898,משה יהושוע יהודה לייב,בנימין,המהריל דסקין
+429,טבת,כט,עתר,1910,ירחמיאל ישראל יצחק,ירחמיאל,הישמח ישראל מאלכסנדר
+501,שבט,א,תרלט,1879,משה,יוסף,מהרם שיק
+502,שבט,ב,תקס,1800,משולם זוסיא (זושא),אליעזר ליפמן,ר' זושא
+504,שבט,ד,תקסז,1807,משה יהודה לייב,יעקב,מסאסוב
+504,שבט,ד,תקע,1810,אברהם,אלכסנדר,"הכהן מקאליסק (ביה""ח הישן טבריה)"
+504,שבט,ד,"תשד""מ",1984,ישראל,מסעוד,הבבא סאלי
+505,שבט,ה,"תרס""ה",1905,יהודה אריה לייב,אברהם מרדכי,השפת אמת
+506,שבט,ו,"תקמ""ו",1786,חיים,מנחם נחום,צאנזר מברודי
+506,שבט,ו,"ת""ר",1840,יצחק,אהרון אריה לייב,מקאליש (בן פרמישלאן)
+506,שבט,ו,"תרפ""ו",1926,חיים צבי,"חנניה יו""ט ליפא",מסיגעט
+507,שבט,ז,"תקע""ד",1814,דוד,שלמה,בידרמן מלעלוב
+507,שבט,ז,"תרנ""ו",1896,ירוחם יהודה לייב,שלמה זלמן,הגדול ממינסק
+510,שבט,י,"תקל""ז",1777,שלום,יצחק,"שרעבי, הרש""ש"
+510,שבט,י,"תש""י",1950,יוסף יצחק,שלום דובער,"הריי""צ מחב""ד"
+513,שבט,יג,"תק""ע",1810,מרדכי,נח,"האדמו""ר מלעכוויטש"
+514,שבט,יד,"תרע""ב",1912,יצחק,יעקב,רבי יעקב אבוחצירא האביר יעקב
+514,שבט,יד,"תקט""ז",1756,יעקב יהושוע,צבי הירש,הפני יהושוע
+514,שבט,יד,"תרנ""ד",1894,יחיאל,שרגא פייבל,הרבי הזקן מאלכסנדר
+516,שבט,טו,"תרס""ג",1903,שלמה יהושוע דוד,יעקב אריה,"האדמו""ר מראדמיזין"
+516,שבט,טז,"תרע""א",1911,שלום מרדכי,משה,"המהרש""ם מברז'ן"
+517,שבט,יז,"תרט""ז",1856,יחזקאל,צבי הירש,"האדמו""ר מקוזמיר"
+518,שבט,יח,"תרס""ד",1904,מרדכי יהודה,ישראל יששכר,האינטערדם רב
+518,שבט,יח,"תרפ""א",1921,צבי הירש,חיים מיכל,חתן החפץ חיים
+519,שבט,יט,"תרע""ו",1916,שמואל,יחיאל מיכל אהרון,"האדמו""ר מסלונים"
+519,שבט,יט,"תר""צ",1930,שמעון,יהודה גרינפלד,"מסמיהלי ב שו""ת מהרש""ג"
+521,שבט,כא,"תרנ""ד",1894,יעקב,אליעזר,הכוכב מיעקב (ווידנפלד)
+521,שבט,כא,"תרמ""ח",,יחיאל מאיר,יעקב צבי,מגוסטינין בעל התהלים
+522,שבט,כב,"תרי""ט",1859,מנחם מענדל,יהודה לייבוש,השרף מקאצק
+522,שבט,כב,"תרמ""ח",1888,יהודה לייב,שלמה איגר,התורת אמת
+523,שבט,כג,"תרנ""ד",1894,יהושוע,שלום רוקח,"האדמו""ר מבעלזא"
+525,שבט,כה,"תקס""ז",1807,מאיר,יהודה לייב,הבית מאיר מפוזנא
+525,שבט,כה,"תרמ""ג",1883,ישראל,זאב,"ר""י סלנטר"
+525,שבט,כה,"תרצ""ז",1937,אהרון,יוסף,חתן החפץ חיים ב עבודת הקרבנות
+526,שבט,כו,"תכ""ז",1667,דוד,שמואל,"הט""ז"
+527,שבט,כז,"תשע""ז",2017,יעקב,צבי יהודה אדלשטיין,מרמת השרון
+529,שבט,כט,"תקצ""ט",1839,בנימין,משה אריה,שרייבר אבד גריידיץ ב אם לבינה
+529,שבט,כט,"תרס""ד",1904,"חנניה יו""ט ליפא",יקותיאל יהודה טייטלבוים,"ב קדושת יו""ט"
+529,שבט,כט,"תרפ""ז",1927,נתן צבי,משה,הסבא מסלבודקא
+530,שבט,ל,"תקפ""ז",1827,מנחם מענדל,ברוך,"משקלוב תלמיד הגר""א"
+600,אדר,א,"תכ""ג",1663,שבתאי,מאיר,"ב הש""ך"
+601,אדר,א,"תרס""ו",1906,ברוך,חיים מצאנז,"האדמו""ר מגארליץ"
+602,אדר,ב,"תשל""ז",1977,ישראל,אברהם מרדכי אלתר,הבית ישראל
+602,אדר,ב,"תשמ""א",1981,יוסף דב,יצחק זאב סולוביצ'יק,
+603,אדר,ג,"תרס""ז",1906,יהודה,שמעיה גרינפעלד,הקול יהודא
+603,אדר,ג,"שע""ב",1612,מרדכי,אברהם יפה,ב הלבושים
+604,אדר,ד,"תקנ""א",1791,לייב שרה'ס,יוסף,"ת הבעש""ט"
+605,אדר,ה,"תקפ""ג",1823,זאב וולף,נפתלי צבי,"ת הבעש""ט"
+607,אדר,ז,"תשע""ב",2012,יעקב יששכר בער,חיים מרדכי,נדבורנא
+607,אדר,ז,"תקפ""א",1821,יצחק אייזיק,יחזקאל טאוב,מקאליב
+611,אדר,יא,"תקס""ו",1806,חיים יוסף דוד,רפאל יצחק זרחיה אזולאי,"החיד""א"
+611,אדר,יא,"תרל""ב",1872,שמואל,יוסף שטראשון,"הרש""ש"
+611,אדר,יא,"עת""ר",1910,אברהם,זאב נחום בורנשטיין,האבני נזר
+611,אדר,יא,"תרצ""ו",1936,יוסף,פישל רוזין,"אב""ד דווינסק ב הצפנת פענח"
+613,אדר,יג,"ד תתקע""ז",1217,יהודה,שמואל החסיד,ב ספר חסידים
+613,אדר,יג,"תשי""ז",1957,שמואל גרונם,יוסף יצחק גריינימן,
+613,אדר,יג,"תשמ""ו",1986,משה,דוד פיינשטיין,האגרות משה
+615,אדר,טו,"תע""ב",1712,צבי הירש,אהרון שמואל קוידינובר,קב הישר
+615,אדר,טו,"תשט""ו",1955,מאיר,שמריהו יוסף קרליץ,"אח החזו""א"
+615,אדר,טו,"תשס""ה",2005,חיים,יעקב הכהן,"ר חיים קמיל ר""י אופקים"
+615,אדר ב,טו,"תשפ""ב",2022,יוסף שמריהו חיים,יעקב ישראל,ר חיים קנייבסקי
+616,אדר,טז,"תרמ""ג",1883,אלעזר מנחם מענדל,משה בידרמן,"האדמו""ר מלעלוב"
+616,אדר,טז,"תשנ""ו",1996,פנחס מנחם,אברהם מרדכי אלתר,גור
+617,אדר,יז,"תרמ""ג",1883,שמעון,משה סופר,"אב""ד קראקא המכתב סופר"
+617,אדר,יז,"תרע""ז",1917,יצחק,אברהם יעקב,הפחד יצחק מבויאן
+618,אדר,יח,"תקנ""ד",1794,אלכסנדר זיסקינד,משה,היסוד ושורש העבודה
+618,אדר,יח,"תר""ל",1870,חנוך העניך,פנחס לעווין,"האדמו""ר מאלכסנדר"
+618,אדר,יח,"תשל""ד",1974,יחזקאל,יהודה לעוינשטיין,המשגיח בפונביז ב אור יחזקאל
+619,אדר,יט,"תרע""ב",1911,בנימין,ישראל מקובסקי,
+619,אדר,יט,"תרל""ד",1874,דוד,צבי אלימלך,מדינוב ב צמח לדוד
+619,אדר,יט,"תרפ""ח",1928,מאיר יחיאל,אברהם יצחק,מאוסטרובצה ב מאיר עיני חכמים
+619,אדר,יט,"תרצ""ב",1932,יוסף חיים,אברהם שלמה זוננפעלד,
+620,אדר,כ,ת,1640,יואל,שמואל יפה סירקיש,"הב""ח"
+620,אדר,כ,"תשנ""ה",1995,שלמה זלמן,חיים יהודה לייב אוירבך,
+621,אדר,כא,"ת""א",1641,מאיר,יעקב יוקף הכהן שיף,"המהר""ם שיף"
+621,אדר,כא,"תקמ""ז",1787,אלימלך,אליעזר ליפמן וייסבלום מליז'ענסק,הנעם אלימלך
+621,אדר,כא,"תרנ""ו",1896,יצחק אלחנן,ישראל איסר ספקטור,
+621,אדר,כא,"תשע""ב",2012,משה יהושוע,חיים מאיר,
+622,אדר,כב,"תרס""ח",1908,יחיאל מיכל,אהרון יצחק,ערוך השולחן
+623,אדר,כג,"תרכ""ו",1866,יצחק מאיר,ישראל רוטנברג,"החידושי הרי""ם"
+624,אדר,כד,"תשע""ו",2016,מאיר,יצחק זאב סולוביצ'יק,
+625,אדר,כה,"תקכ""א",1761,גרשון אשכנזי מקיטוב,אפרים,"גיס הבעש""ט"
+627,אדר,כז,"תרל""ה",1875,יוסף שאול,אריה לייבוש נתנזון,השואל ומשיב
+627,אדר,כז,"תרפ""ו",1926,שלמה,חיים חייקל אלישוב,ב השבו ואחלמה
+627,אדר,כז,"תשע""ב",2012,חיים פנחס,יעקב יצחק שייברג,
+629,אדר,כט,"תרכ""ו",1866,שלמה,דב צבי רבינוביץ,התפארת שלמה מרדאמסק
+702,ניסן,ב,"תר""פ",1920,שלום בער,שמואל שניאורסון,"הרש""ב מחב""ד"
+705,ניסן,ה,"תקפ""ה",1825,אברהם יהושוע העשל,שמואל ממעז'יבוז',האוהב ישראל מאפטא
+705,ניסן,ה,"תרס""ב",1902,שניאור זלמן,שלמה,התורת חסד מלובלין
+706,ניסן,ו,"שצ""ג",1633,מאיר,יעקב שיף,"המהר""ם שיף"
+706,ניסן,ו,"תש""ז",1947,אהרון,שמואל יעקב ראטה,השומר אמונים
+707,ניסן,ז,"תקס""ז",1807,אברהם,שלמה זלמן,"אחי הגר""א ב מעלות התורה"
+708,ניסן,ח,"תע""ב",1712,אליהו,בנימין וואלף שפירא,האליה רבה
+708,ניסן,ח,"תק""ס",1800,מרדכי,דב בער שפירא,"האדמו""ר מנעשכיז"
+709,ניסן,ט,"תשל""ב",1972,חיים מאיר,ישראל הגער,האמרי חיים
+711,ניסן,יא,ה ל',1270,ר משה,בן נחמן מגירונדה,"הרמב""ן"
+711,ניסן,יא,"ש""צ",1630,ישעיה,אברהם הלוי הורוויץ,ב שני לוחות הברית
+713,ניסן,יג,"של""ה",1575,יוסף,אפרים קארו,הבית יוסף
+713,ניסן,יג,"תרכ""ו",1866,מנחם מנדל,שלום שכנא שניאורסון,הצמח צדק
+714,ניסן,יד,ב קכד,-1711,אברהם אבינו,תרח ואמתלאי בת כרנבו,
+714,ניסן,יד,"תר""ה",1845,אשר ישעיה,אליעזר ליפמן רובין,ראפשיץ
+715,ניסן,טו,"תשע""ה",2015,שמואל,יוסף צבי וואזנר,שבט הלוי
+719,ניסן,יט,"שע""ד",1614,יהושוע וולק,אלכסנדר,"הסמ""ע"
+719,ניסן,יט,"תקל""ב",1772,אהרון הגדול,יעקב,מקרלין
+719,ניסן,יט,"תקפ""א",1821,פנחס אליהו,מאיר הורוויץ,ב ספר הברית
+719,ניסן,יט,"תש""ג",1943,מנחם,"אברהם זמבה הי""ד",
+720,ניסן,כ,"ד תשצ""ח",1038,רב האי,"ר שרירא גאון ר""י פומפידיתא",
+720,ניסן,כ,תרכד,1924,יעקב דוד,יצחק אייזיק מראדומסק,שר הרפואה
+720,ניסן,כ,"תר""ה",1845,יחזקאל,יוסף פנעט,מקרלסבורג ב המראה יחזקאל
+722,ניסן,כב,"תפ""ז",127,יהודה,שמואל רוזאניש,ב המשנה למלך והפרשת דרכים
+722,ניסן,כב,"תר""ח",1848,ישראל יצחק,שמעון קאליש,"האדמו""ר הזקן מווארקא"
+723,ניסן,כג,"שמ""ה",1585,משה,יוסף טיראני,"המבי""ט"
+725,ניסן,כה,"תרל""ו",1876,חיים,אריה לייבוש האלבערשטאם מצאנז,
+727,ניסן,כז,"תקע""ט",1819,יהודה,יוסף כהנא,ב קונטרס הספיקות
+728,ניסן,כח,"ת""כ",1660,שבתאי שעפטיל,ישעיה הורוויץ,ב ווי העמודים
+728,ניסן,כח,"תרל""ג",1873,יהושוע,שלמה יהודה,מאוסטרובה ב תולדת אדם
+729,ניסן,כט,"תרי""ח",1858,משה,ישראל פולייר מקוברין,ב האמרות טהורות
+730,ניסן,ל,"תקע""ז",1815,נחום,יוסף סופר,מטאחוב
+730,ניסן,ל,"ד תתק""א",1141,יוסף הלוי,מאיר מיגאש,תלמיד הריף
+730,ניסן,ל,"ש""פ",1620,חיים,יוסף ויטאל,"תלמיד האר""י"
+730,ניסן,ל,"תקכ""ט",1769,יעקב נתנאל,נפתלי צבי הירש וויל,הקרבן נתנאל
+730,ניסן,ל,"תקל""ו",1776,יעקב ישראל,צבי מעמדין,"היעב""ץ"
+800,אייר,א,"ת""ס",1700,יוסף יוסקא,יהודה יודל,ב היסוד יוסף
+801,אייר,א,"תשס""ו",2006,משה שמואל,אריה שפירא,"ר""י באר יעקב"
+801,אייר,א,"תע""ח",1718,צבי הירש,יעקב אשכנזי,החכם צבי
+801,אייר,א,"תקל""ח",1778,שמואל שמעלקא,צבי הירש הורוויץ,מניקלשבורג
+801,אייר,א,"תקמ""ח",1788,מנחם מענדל,משה,מוויטבסק ב פרי הארץ
+801,אייר,א,"תרצ""ג",1933,אברהם,שמואל ווינבערג,הבית אברהם מסלונים
+803,אייר,ג,"תרפ""ה",1925,ישעיה,משה שטיינר,מקערסטיר
+804,אייר,ד,"תרנ""ב",1892,יוסף דב,יצחק זאב סולוביצ'יק,בית הלוי
+804,אייר,ד,"תשד""מ",1984,שמואל אליוהו,שאול ידידיה אלעזר טאוב,האמרי אש ממודזיץ
+805,אייר,ה,תרלח,,מאיר,יצחק אייזיק,אמרי בינה
+806,אייר,ו,קד,1344,לוי,גרשום,"הרלב""ג"
+806,אייר,ו,"תרס""ט",1909,יוסף מאיר,שמואל צבי וייס,האמרי יוסף מספינקא
+807,אייר,ז,"שע""ט",1619,שלמה אפרים,אהרון,לונטשיץ ב הכלי יקר
+808,אייר,ח,"תקצ""ד",1834,ירחמיאל,יעקב יצחק רבינוביץ,מפשיסחא
+810,אייר,י,"שע""ו",1616,מאיר,גדליה מלובלין,"המהר""ם על הש""ס"
+810,אייר,י,"תקנ""ב",1792,יוסף,מאיר תאומים,הפרי מגדים
+810,אייר,י,"תרמ""ב",1882,דוד מטאלנא,מרדכי מטשערנוביל,
+811,אייר,יא,"תקפ""ז",1827,נפתלי צבי,מנחם מענדל הורוויץ,מרופשיץ
+811,אייר,יא,"תקצ""ה",1835,יצחק מראדוויל,יחיאל מיכל מזלאטשוב,
+814,אייר,יד,,,מאיר בעל הנס,,הילולא
+815,אייר,טו,"תר""ט",1849,חיים מאיר יחיאל,אבי עזרי זלג שפירא,השרף ממוגלנצא
+816,אייר,טז,"תשס""ו",2006,צבי הירש,ניסן חיים רוזנבוים,מקרעטשניף
+817,אייר,יז,"תקנ""ג",1793,יחזקאל,יהודה הלוי,הנודע ביהודה
+817,אייר,יז,"תק""ס",1800,משה חיים אפרים,יחיאל מיכל אשכנזי,הדגל מחנה אפרים
+818,אייר,יח,"ג תתפ""א",121,ר שמעון בר יוחאי,,
+818,אייר,יח,"ה של""ג",1573,משה,ישראל איסרליש מקראקא,"הרמ""א"
+819,אייר,יט,"ה נ""ג",1293,מאיר,ברוך מרוטנבורג,"המהר""מ מרוטנבורג"
+819,אייר,יט,"תקע""ה",1815,מנחם מענדל,יוסף,מרימינוב
+820,אייר,כ,"תקצ""ז",1837,מרדכי,מנחם מנחום,מטשערנוביל
+820,אייר,כ,"תשי""ג",1953,מאיר,אהרון שווארץ,מפודהייץ
+821,אייר,כא,"תרע""ו",1916,שמריהו יוסף,שמשון קרליץ,"אבי החזו""א"
+822,אייר,כב,"תרנ""ד",1894,מרדכי שרגא פייבוש מהוסיאטין,ר ישראל מרוזין,
+822,אייר,כב,"תר""ץ",1930,"ס""ק שלמה אליעזר",יעקב,אלפנדרי
+825,אייר,כה,"תקצ""ב",1832,יעקב,יעקב משה לורברבוים,מליסא נתיבות המשפט
+825,אייר,כה,"תרי""ד",1854,חיים,מנחם מענדל מקוסוב,התורת חיים
+826,אייר,כו,"ד תש""ב",942,סעדיה,יוסף גאון,
+826,אייר,כו,"תק""ז",1747,משה חיים,יעקב חי לוצאטו,"הרמח""ל"
+826,אייר,כו,"תר""ט",1849,יצחק,חיים מוואלוזין,
+826,אייר,כו,"תש""ה",1945,שלמה,מרדכי מזוויעהל,
+827,אייר,כז,"תשל""ו",1976,ירחמיאל יהודה מאיר,שמעון שלום קאליש,"האדמו""ר מאמשינוב"
+828,אייר,כח,"ב תתפ""ג",-872,שמואל הנביא,,
+829,אייר,כט,"תר""י",1850,מאיר,אהרון אריה,מפרמישלאן
+902,סיון,ב,"תרצ""ו",1936,ישראל,ברוך הגער,האהבת ישראל מויזניץ
+902,סיון,ב,"תרצ""ז",1937,חיים אלעזר,צבי הירש שפרא,המנחת אלעזר ממונקאטש
+903,סיון,ג,"תקס""א",1801,יעקב שמשון,יצחק שפירא,משיפיטובקה ת המגיד
+905,סיון,ה,"תקנ""ח",1798,זאב וואלף הלוי,,מז'יטומיר ב אור המאיר
+906,סיון,ו,ב תתקכה,-830,"דוד בן ישי ע""ה",,
+906,סיון,ו,"שמ""ח",1588,חיים,בר בצלאל,"אח המהר""ל"
+906,סיון,ו,"תק""כ",1760,ישראל,אליעזר,"הבעש""ט"
+906,סיון,ו,"תש""ח",1948,אברהם מרדכי,יהודה ארי' לייב,האמרי אמת מגור
+907,סיון,ז,"תק""ט",1749,נעקה"ש גר הצדק אברהם בן אברהם,,
+909,סיון,ט,"תקצ""ט",1839,ישראל,שמואל משקלוב,פאת השולחן
+909,סיון,ט,"תרל""ג",1873,יצחק אייזיק,יששכר בער אייכנשטיין,מזידיטשוב
+909,סיון,ט,"תרצ""ט",1939,יעקב חיים,יצחק ברוך סופר,כף החיים
+910,סיון,י,"ד תתס""ג",1103,יצחק,יעקב אלפסי,"הרי""ף"
+910,סיון,י,"תשע""א",2011,חנה רבקה,ישראל יצחק,
+911,סיון,יא,"תשמ""ט",1989,יהודה,אלטר יחזקאל אליהו הורוביץ,"האדמו""ר מדזיקוב"
+913,סיון,יג,"תש""ד",1944,יצחק אייזיק,יוסף מאיר,החקל יצחק מספינקא
+914,סיון,יד,"תקפ""א",1821,חיים,יצחק,ר חיים מוואלוזין ב נפש החיים
+916,סיון,טז,"תש""ד",1944,שלום אליעזר,חיים מצאנז,"הי""ד מראצפרט"
+917,סיון,יז,"תרל""ב",1872,אהרון,אשר פרלוב,הבית אהרון מקרלין
+918,סיון,יח,"תר""ג",1843,יששכר דב בער,יצחק בארון,"האדמו""ר מראדושיץ"
+918,סיון,יח,"תרצ""ו",1936,ירוחם,אברהם הלוי,המשגיח ממיר
+920,סיון,כ,"תקס""ט",1809,צבי הירש,שלום זעליג מנדבורנא,ת המגיד
+921,סיון,כא,"תרנ""ג",1893,שלמה,אלעזר שפירא,ממונקאטש ב השם שלמה
+922,סיון,כב,"תשל""ג",1973,איתמר,מאיר רוזנבוים,מנדבורנא
+923,סיון,כג,"תרכ""ו",1866,יהודה,ישראל אסאד,"המהר""י אסאד אבד סארדאהלי"
+927,סיון,כז,"תק""ד",1744,מאיר,יצחק,ב הפנים מאירות אבד אייזנשטאדט
+928,סיון,כח,"תש""ח",1948,שמשון אהרון,אברהם יצחק פולנסקי,אבד טעפליק
+930,סיון,ל,"תרס""ח",1907,מאיר,מרדכי מנאדבורנא,ר' מאיר'ל מקרעטשניף
+930,סיון,ל,"התרכ""ט",1869,שלמה יעקב יוסף,יהודה אהרון,ר שלמה קלוגער מברודי
+1001,תמוז,א,"תקפ""ז",1827,קלונימוס קלמן,אהרון הלוי עפשטיין,ב המאור ושמש
+1002,תמוז,ב,"תקכ""ה",1765,נחמן,יצחק,"מהורדונקא ת הבעש""ט"
+1002,תמוז,ב,"תרמ""ט",1889,אברהם,מרדכי טברסקי,ב המגן אברהם המגיד מטריסק
+1002,תמוז,ב,"תרע""ח",1918,אליעזר ניסן,נפתלי חיים הורוביץ,מדז'יקוב
+1003,תמוז,ג,"תשנ""ד",1994,מנחם מנדל,לוי יצחק,"האדמור מחב""ד"
+1004,תמוז,ד,"ד תתקל""א",1171,יעקב,מאיר,רבנו תם
+1004,תמוז,ד,"תקס""ה",1805,פנחס,צבי הורווויץ,בעל ההפלאה
+1008,תמוז,ח,"תרל""ז",1877,מאיר,אליעזר הורוויץ,מדז'יקוב
+1009,תמוז,ט,"תשנ""ד",1994,יקותיאל יהודה,צבי הלברשטאם,שפע חיים
+1011,תמוז,יא,"תקצ""א",1831,צבי הירש,יצחק אייזיק,מזידיטשוב שר בית הזוהר
+1012,תמוז,יב,"ה ק""ח",1348,רבינו יעקב,אשר,בעל הטורים
+1014,תמוז,יד,"שצ""ט",1639,יוסף,משה,"מטראני המהרי""ט"
+1015,תמוז,טו,"תק""ג",1743,רבינו חיים,משה בן עטר,האור החיים הק'
+1015,תמוז,טו,"תקמ""ה",1785,אריה לייב,אשר גינצבורג ממיץ,השאגת אריה
+1015,תמוז,טו,"תשכ""ט",1969,דוד משה,אליעזר זאב רוזנבוים,"האדמו""ר מקרעטשינף רחובות"
+1017,תמוז,יז,"תשכ""ז",1967,יעקב יוסף,יצחק אייזיק הרמן,הכל לאדון הכל
+1021,תמוז,כא,"תרצ""ג",1933,אברהם מתתיהו,מנחם נחום פרידמן,משטפנשט
+1022,תמוז,כב,"תרל""ג",1873,דוד,מנחם מנדל מורגנשטרן,קוצק
+1023,תמוז,כג,"ש""ל",1570,משה,יעקב קורדובירו,ב התומר דבורה ופרדס רימונים
+1025,תמוז,כה,"תקצ""א",1830,מאיר,שמואל הלוי רוטנברג מאפטא,ב אור לשמים
+1028,תמוז,כח,"תר""א",1841,משה,צבי טייטלבוים מאוהל,הישמח משה
+1028,תמוז,כח,"תרמ""ו",1886,שלמה,יוסף גאנצפריד,"קיצוש""ע"
+1028,תמוז,כח,"תרס""ד",1904,נחמן,חיים אריה כהנא,מספינקא
+1029,תמוז,כט,"ד תתס""ה",1105,שלמה,יצחק,"רש""י"
+2003,אב,ג,תח,1648,שמשון,פסח,"מאוסטרופול דין ידין ע""ס קרניים"
+2004,אב,ד,"ש""פ",1620,מנחם עזריה,יצחק ברכיה מפאנו,"הרמ""ע מפאנו"
+2005,אב,ה,"של""ב",1572,יצחק,שלמה לוריא אשכנזי,"האר""י זל"
+2005,אב,ה,"תקנ""ג",1793,חיים,צבי הירש קארסנא,"תלמיד הבעש""ט"
+2005,אב,ה,"ת""ש",1940,חיים עוזר,דוד שלמה גרודזינסקי,"שו""ת אחיעזר"
+2007,אב,ז,"תקנ""ה",1795,יששכר דב בער,אירה יהודה לייבוש,מזלאטשוב ב מבשר צדק
+2007,אב,ז,"תר""ע",1910,משה,עמרם גרינוואלד,ערוגת הבושם
+2007,אב,ז,"תש""ס",2000,שלום נח,משה אברהם ברזובסקי,הנתיבות שלום
+2008,אב,ח,"תרנ""ח",1898,שמחה זיסל,ישראל,הסבא מקלם
+2009,אב,ט,"תקע""ה",1815,יעקב יצחק,אברהם אליעזר הלוי הורביץ,החוזה מלובלין
+2013,אב,יג,"שצ""ג",1633,נתן נטע,שלמה שפירא מקראקא,המגלה עמוקות
+2013,אב,יג,"תקפ""ט",1829,מרדכי,אברהם בנעט,אבד ניקלשבורג
+2014,אב,יד,"תרל""ד",1874,צבי הירש,אהרון פרידמן,מליסקא אך פרי תבואה
+2017,אב,יז,"תפ""ד",1724,הפרנס ר שמשון,יוסף ורטהימר מוינה,
+2021,אב,כא,"תרע""ח",1918,חיים,יוסף דב סולובייציק,
+2021,אב,כא,"תשי""ז",1957,אהרון,יששכר דב רוקח,"האדמו""ר מבעלזא"
+2022,אב,כב,"תקל""ג",1773,ר מאיר הגדול,יעקב,מפרמישלאן
+2023,אב,כג,"תשמ""ה",1985,יעקב ישראל,חיים פרץ קנייבסקי,הסטייפלר
+2025,אב,כה,"תקצ""א",1831,אברהם חיים,נפתלי צבי הורוויץ מרופשיץ,
+2025,אב,כה,"תקצ""ט",1839,יעקב משולם,מרדכי זאב אורנשטיין מלבוב,ב הישועות יעקב
+2026,אב,כו,"תשל""ט",1979,יואל,"חנניה יו""ט ליפא",הויואל משה מסאטמר
+2027,אב,כז,"תש""ב",1942,יהודה,משה ישועה פתייה,בית לחם יהודה ורוחות מספרות
+2027,אב,כז,"תשע""ה",2015,משולם פייש,מרדכי סגל לטווי,"האדמו""ר מטאש"
+2028,אב,כח,"תרנ""ג",1893,נפתלי צבי יהודה,יעקב ברלין,"הנצי""ב מוואלוז'ין"
+2029,אב,כט,"תרס""ט",1909,שמואל,צבי הירש סלאנט,
+3002,אלול,ב,"תש""ו",1946,אליעזר,ישראל הגער,הדמשק אליעזר
+3004,אלול,ד,"תל""א",1671,משה,נפתלי הירש רבקש מוילנא,ב באר הגולה
+3004,אלול,ד,"תרפ""ו",1926,מאיר שמחה,שמשון קלונימוס הכהן מדווינסק,האור שמח
+3006,אלול,ו,"תי""ד",1654,"גרשון שאול יו""ט ליפמן",נתן הלוי הלר,"ב התו""ס יו""ט"
+3006,אלול,ו,"תקל""ט",1779,שמשון חיים,נחמן מיכאל נחמני,הזרע שמשון
+3006,אלול,ו,"תרמ""ג",1883,יקותיאל יהודה,אליעזר ניסן מסיגעט,הייטב לב
+3009,אלול,ט,"תר""ס",1900,צדוק,יעקב הכהן מלובלין,צדקת הצדיק
+3009,אלול,ט,"תשל""ו",1976,נחום מרדכי,אלתר ישראל שמעון פרלוב,"האדמו""ר מנובומינסק"
+3010,אלול,י,"תקנ""א",1791,פנחס,אברהם אבא שפירא מקוריץ,
+3010,אלול,י,"תרנ""ו",1896,יצחק מבוהוש,שלום יוסף מרוז'ין,
+3011,אלול,יא,תריא,1851,שלום יוסף,ישראל מרוזין,
+3011,אלול,יא,תרמג,1883,אברהם יעקב מסדיגורא,ישראל מרוזין,
+,אלול,יב,תרכה,1865,אלעזר,צבי אלימלך,מלאנצהוט בן הבני יששכר
+3012,אלול,יב,"תקפ""ז",1827,שמחה בונים,צבי הירש,מפשיסחא
+3012,אלול,יב,"תקפ""ח",1828,משה אליקים בריעה הופשטיין,ישראל מקוזניץ,הבאר משה
+3013,אלול,יג,"תרס""ט",1909,יוסף חיים,אליהו,הבן איש חי
+3016,אלול,טו,"תקמ""ז",1787,יעקב קופל חסיד,נחמיה פייבל,"ת הבעש""ט"
+3018,אלול,יח,"שס""ט",1609,יהודה ליווא,בצלאל,"המהר""ל מפראג"
+3020,אלול,כ,"תשכ""ט",1969,יוסף שלמה,יהודה לייב כהנמן,מפונוביז
+3020,אלול,כ,"תש""ל",1970,אליהו,יעקב לופיאן,ב הלב אליהו
+3020,אלול,כ,"תשנ""ו",1996,משה אריה,ישראל פריינד,גאבד העדה
+3021,אלול,כא,תקכד,1764,יונתן,נתן נטע אייבשיץ,היערות דבש
+3022,אלול,כב,"קפ""ז",1427,יעקב,משה סגל,"המהרי""ל ר""מ מגנצא"
+3023,אלול,כג,"תקפ""ו",1826,אורי,פנחס,השרף מסטרליסק
+3023,אלול,כג,"תרל""ד",1874,יוסף,משה באבד,המנחת חינוך
+3023,אלול,כג,"תש""ב",1942,יצחק מנחם מנדל,שמואל צבי דנציגר,העקדת יצחק מאלכסנדר
+3024,אלול,כד,"תרצ""ג",1933,ישראל מאיר,אריה זאב,החפץ חיים
+3024,אלול,כד,"תשל""ו",1976,יחזקאל,מרדכי זלמן אברמסקי,החזון יחזקאל
+3025,אלול,כה,"תקמ""א",1781,יחיאל מיכל,יצחק,המגיד מזלאטשוב
+3026,אלול,כו,"תשכ""ה",1965,חנך העניך,שמואל בורנשטיין,"האדמו""ר מסוכטשוב"
+3026,אלול,כו,"תקפ""ט",1829,מאיר אברהם,משה יוזפא,הפרי צדיק
+3027,אלול,כז,"תק""ס",1800,נתן,יעקב שמעון הכהן אדלר,"רב החת""ס"
+3027,אלול,כז,"תרט""ו",1855,שלום,אלעזר רוקח,השר שלום מבעלזא`;
+
+// ── Parse DB ──────────────────────────────────────────────────────────
+const DB = parseCSV(CSV_DATA).slice(1).map(f=>({
+  id:(f[0]||'').trim(), month:(f[1]||'').trim(), day:(f[2]||'').trim(),
+  hebrewYear:(f[3]||'').trim(), gregYear:(f[4]||'').trim(),
+  name:(f[5]||'').trim(), fatherName:(f[6]||'').trim(), title:(f[7]||'').trim()
+})).filter(r=>r.month&&r.day&&r.name);
+
+let EXTRA_DB = []; // entries loaded from Google Sheets
+let LOCAL_EDITS = []; // entries added/edited by admin this session (never filtered by HIDDEN_KEYS)
+let LOCAL_HIDDEN = new Set(); // keys deleted by admin this session (filters LOCAL_EDITS)
+let SITE_MESSAGE = ''; // broadcast message from admin
+let HIDDEN_KEYS = new Set(); // keys of entries overridden by edits
+let ENTRY_REGISTRY = {}; // key → entry object, populated during render
+
+// Full key — backward-compat: rabbi=true/undefined gives 7-field key (matches old hide keys in sheet);
+// rabbi=false appends |norabbi so it's distinct and never accidentally filtered by an old hide key.
+function fullEntryKey(e){
+  const base=[e.month,e.day,e.name,e.fatherName,e.hebrewYear,e.gregYear,e.title].join('|');
+  return (e.rabbi===false||e.rabbi==='false') ? base+'|norabbi' : base;
+}
+// DB + EXTRA_DB filtered by HIDDEN_KEYS; LOCAL_EDITS always shown (filtered only by LOCAL_HIDDEN).
+// When showHidden=true (admin recovery mode) hidden entries are included but flagged.
+let showHidden=false;
+function allEntries(includeHidden){
+  const isAdmin=!!getKey();
+  const show=includeHidden||showHidden;
+  const visible=e=>show||!HIDDEN_KEYS.has(fullEntryKey(e));
+  const localVisible=e=>show||!LOCAL_HIDDEN.has(fullEntryKey(e));
+  const all=[...DB.filter(visible),...EXTRA_DB.filter(visible),...LOCAL_EDITS.filter(localVisible)];
+  return isAdmin?all:all.filter(e=>!e.private);
+}
+function isHiddenEntry(e){ return HIDDEN_KEYS.has(fullEntryKey(e))||LOCAL_HIDDEN.has(fullEntryKey(e)); }
+
+let dateOffset=0; // 0=today, -1=yesterday, +1=tomorrow
+
+// ── Google Sheets integration ─────────────────────────────────────────
+async function fetchSheetEntries(){
+  if(!APPS_SCRIPT_URL) return;
+  try{
+    const res = await fetch(APPS_SCRIPT_URL+'?t='+Date.now(),{redirect:'follow'});
+    const data = await res.json();
+    const parseEntries=arr=>arr.filter(e=>e.month&&e.day&&e.name).map(e=>({...e,private:e.private==='true'||e.private===true}));
+    if(Array.isArray(data)){
+      EXTRA_DB = parseEntries(data);
+      HIDDEN_KEYS = new Set(); SITE_MESSAGE = '';
+    } else if(data && data.entries){
+      EXTRA_DB = parseEntries(data.entries||[]);
+      HIDDEN_KEYS = new Set(data.hidden||[]);
+      SITE_MESSAGE = data.message||'';
+    }
+    renderMessage();
+    renderToday(); renderSearch();
+  }catch(e){ console.warn('Sheet fetch failed:',e); }
+}
+
+async function postToSheet(payload){
+  if(!APPS_SCRIPT_URL) return {error:'no_url'};
+  try{
+    const res = await fetch(APPS_SCRIPT_URL,{method:'POST',body:JSON.stringify(payload),redirect:'follow'});
+    return await res.json();
+  }catch(e){ return {error:'network'}; }
+}
+
+// ── Admin key management ──────────────────────────────────────────────
+const KEY_STORE = 'yahrtzeit_admin_key';
+const getKey = ()=>localStorage.getItem(KEY_STORE)||'';
+const setKey = k=>localStorage.setItem(KEY_STORE,k);
+const clearKey = ()=>localStorage.removeItem(KEY_STORE);
+
+function updateAdminUI(){
+  const has = !!getKey();
+  document.getElementById('adminUnlock').style.display    = has?'none':'block';
+  document.getElementById('adminKeyInput').style.display  = 'none';
+  document.getElementById('adminAddSection').style.display= has?'block':'none';
+  document.getElementById('suggestCard').style.display    = has?'none':'block';
+  if(has) document.getElementById('noSheetAddNotice').style.display = APPS_SCRIPT_URL?'none':'block';
+  renderMessage();
+}
+function showAdminKeyInput(){
+  document.getElementById('adminUnlock').style.display='none';
+  document.getElementById('adminKeyInput').style.display='block';
+  document.getElementById('keyInput').focus();
+}
+function cancelAdminKey(){
+  document.getElementById('adminKeyInput').style.display='none';
+  document.getElementById('adminUnlock').style.display='block';
+}
+async function saveAdminKey(){
+  const k=document.getElementById('keyInput').value.trim();
+  if(!k)return;
+  const loginBtn=document.querySelector('#adminKeyInput .btn');
+  loginBtn.disabled=true; loginBtn.textContent='...';
+  // Validate password against server before granting access
+  // Only block on explicit Unauthorized — network/unknown errors still allow login
+  if(APPS_SCRIPT_URL){
+    const res=await postToSheet({action:'validate',key:k});
+    if(res.error==='Unauthorized'){
+      loginBtn.disabled=false; loginBtn.textContent=T('loginBtn');
+      document.getElementById('keyInput').value='';
+      document.getElementById('keyInput').placeholder=T('wrongPassword');
+      setTimeout(()=>{ document.getElementById('keyInput').placeholder=T('keyPh'); },3000);
+      return;
+    }
+  }
+  setKey(k);
+  document.getElementById('keyInput').value='';
+  loginBtn.disabled=false; loginBtn.textContent=T('loginBtn');
+  cancelAdminKey();
+  updateAdminUI();
+  renderToday(); renderSearch();
+}
+function logoutAdmin(){ clearKey(); updateAdminUI(); renderToday(); renderSearch(); }
+
+async function populateSheet(){
+  if(!APPS_SCRIPT_URL){ alert('יש להגדיר Apps Script URL קודם'); return; }
+  if(!confirm(T('confirmPopulate'))) return;
+  const btn = document.getElementById('populateBtn');
+  btn.textContent = T('uploading'); btn.disabled = true;
+  const res = await postToSheet({ action:'populate', key:getKey(), entries:DB });
+  if(res.success){
+    btn.textContent = `${T('uploadedOk')} ${res.count} ${T('tzaddikim')}`;
+    btn.style.color = '#155724';
+  } else {
+    btn.textContent = T('populateBtn');
+    btn.disabled = false;
+    alert('שגיאה: ' + (res.error||'לא ידוע'));
+  }
+}
+
+// ── Card renderer ─────────────────────────────────────────────────────
+function renderCard(e, showDay=false){
+  const hy=addGershayim(e.hebrewYear);
+  const years=[hy,e.gregYear].filter(Boolean).join(' / ');
+  const father=e.fatherName?` <span>ב"ר ${e.fatherName}</span>`:'';
+  const dayBadge=showDay?`<div class="cday-badge">${e.day}</div>`:'';
+  const key=fullEntryKey(e);
+  ENTRY_REGISTRY[key]=e;
+  const isAdmin=!!getKey();
+  const hidden=isAdmin&&isHiddenEntry(e);
+  const prefix=(e.rabbi===false||e.rabbi==='false')?'':'רבי ';
+  const lockIcon=e.private&&isAdmin?`<span title="רשומה פרטית" style="font-size:.8rem;opacity:.7">🔒</span>`:'';
+  const ek=key.replace(/"/g,'&quot;');
+  // In recovery mode: show grayed-out hidden entries with a restore button; no edit/delete
+  if(hidden){
+    return `<div class="card" style="opacity:.45;background:#f5f5f5;border-style:dashed">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+        <div style="flex:1">
+          <div class="cname" style="text-decoration:line-through">${prefix}${e.name}${father}</div>
+          ${e.title?`<div class="ctitle">${e.title}</div>`:''}
+          ${years?`<div class="cyears">${years}</div>`:''}
+        </div>
+        <div style="display:flex;gap:5px;align-items:center;flex-shrink:0">
+          ${dayBadge}
+          <button class="btn-outline btn-sm" onclick="restoreEntry(this)" data-ekey="${ek}">🔓 ${T('restore')}</button>
+        </div>
+      </div>
+    </div>`;
+  }
+  const editBtn=isAdmin?`<button class="btn-edit" onclick="openEditByKey(this)" data-ekey="${ek}">✏️</button>`:'';
+  const delBtn=isAdmin?`<button class="btn-edit" style="color:#c0392b;border-color:#e8b4b0" onclick="deleteEntry(this)" data-ekey="${ek}">🗑️</button>`:'';
+  return `<div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+      <div style="flex:1">
+        <div class="cname">${prefix}${e.name}${father}${lockIcon}</div>
+        ${e.title?`<div class="ctitle">${e.title}</div>`:''}
+        ${years?`<div class="cyears">${years}</div>`:''}
+      </div>
+      <div style="display:flex;gap:5px;align-items:center;flex-shrink:0">
+        ${dayBadge}${editBtn}${delBtn}
+      </div>
+    </div>
+  </div>`;
+}
+
+// ── Tab 0: Today (with prev/next navigation) ──────────────────────────
+function navigateDay(delta){
+  dateOffset+=delta;
+  renderToday();
+}
+
+function renderToday(){
+  const base=new Date();
+  base.setDate(base.getDate()+dateOffset);
+  const jd=gregToJD(base.getFullYear(),base.getMonth()+1,base.getDate());
+  const hd=jdToHebrew(jd);
+  const mName=MONTH_NAMES[hd.month], dStr=dayToHeb(hd.day), yStr=hebrewYearStr(hd.year);
+  document.getElementById('todayHDate').textContent=`${dStr} ${mName} ${yStr}`;
+  const label=dateOffset===0?T('today'):dateOffset===-1?T('navYest'):dateOffset===1?T('navTomr'):(dateOffset>0?`+${dateOffset}`:`${dateOffset}`)+' '+T('days');
+  document.getElementById('dayNavLabel').textContent=label;
+  const matches=allEntries().filter(e=>e.month===mName&&e.day===dStr);
+document.getElementById('todayList').innerHTML=matches.length
+    ?matches.map(e=>renderCard(e)).join('')
+    :`<div class="no-res">${T('noToday')}</div>`;
+}
+
+// ── Auto-fill Hebrew letters + Gregorian from numeric Hebrew year ────────
+// numId = the number input (e.g. 5786), dispId = Hebrew letters field, gId = Gregorian field
+function autoHYear(numId,dispId,gId){
+  const h=parseInt(document.getElementById(numId).value,10);
+  if(h>1000){
+    document.getElementById(gId).value=h-3760;
+    document.getElementById(dispId).value=hebrewYearStr(h);
+  }
+}
+// kept for any legacy oninput references
+function autoGregYear(hId,gId){
+  const h=parseInt(document.getElementById(hId).value,10);
+  if(h>1000) document.getElementById(gId).value=h-3760;
+}
+
+// ── Tab 1: Search / Show All ──────────────────────────────────────────
+let showAllMode=false;
+
+function toggleShowAll(){
+  showAllMode=!showAllMode;
+  const btn=document.getElementById('showAllBtn');
+  btn.textContent=showAllMode?T('searchByDate'):T('showAll');
+  btn.classList.toggle('active',showAllMode);
+  document.getElementById('nameSearchRow').style.display=showAllMode?'block':'none';
+  if(showAllMode){ document.getElementById('nameSearch').value=''; renderAll(); }
+  else { renderSearch(); }
+}
+
+function onSearchChange(){ if(!showAllMode) renderSearch(); }
+
+function sortEntries(arr){
+  return [...arr].sort((a,b)=>{
+    const md=(MONTH_SORT[a.month]??99)-(MONTH_SORT[b.month]??99);
+    if(md!==0)return md;
+    return DAYS_LIST.indexOf(a.day)-DAYS_LIST.indexOf(b.day);
+  });
+}
+
+function renderSearch(){
+  const m=document.getElementById('searchMonth').value;
+  const d=document.getElementById('searchDay').value;
+  const matches=allEntries().filter(e=>e.month===m&&e.day===d);
+  document.getElementById('searchList').innerHTML=matches.length
+    ?matches.map(e=>renderCard(e)).join('')
+    :`<div class="no-res">${T('noDateRes')}</div>`;
+}
+
+function renderAll(){
+  const q=(document.getElementById('nameSearch').value||'').trim();
+  let entries=allEntries();
+  if(q) entries=entries.filter(e=>
+    e.name.includes(q)||e.fatherName.includes(q)||e.title.includes(q)||
+    (e.name+' '+e.fatherName).includes(q)||(e.fatherName+' '+e.name).includes(q));
+  entries=sortEntries(entries);
+  if(!entries.length){
+    document.getElementById('searchList').innerHTML=`<div class="no-res">${T('noResults')}</div>`;
+    return;
+  }
+  let html='', curMonth=null;
+  for(const e of entries){
+    if(e.month!==curMonth){ curMonth=e.month; html+=`<div class="month-header">— ${curMonth} —</div>`; }
+    html+=renderCard(e,true);
+  }
+  document.getElementById('searchList').innerHTML=html;
+}
+
+// ── Tab 2: Suggest ────────────────────────────────────────────────────
+async function submitSuggestion(ev){
+  ev.preventDefault();
+  if(!APPS_SCRIPT_URL){
+    document.getElementById('noSheetNotice').style.display='block';
+    return;
+  }
+  const btn = ev.submitter || ev.target.querySelector('button[type=submit]');
+  btn.disabled = true; btn.textContent = T('sending');
+  const payload={
+    action:'suggest',
+    month:document.getElementById('sugMonth').value,
+    day:document.getElementById('sugDay').value,
+    hebrewYear:document.getElementById('sugHYear').value.trim(),
+    gregYear:document.getElementById('sugGYear').value.trim(),
+    name:document.getElementById('sugName').value.trim(),
+    fatherName:document.getElementById('sugFather').value.trim(),
+    title:document.getElementById('sugTitle').value.trim(),
+    note:document.getElementById('sugNote').value.trim()
+  };
+  const res=await postToSheet(payload);
+  if(res.success){
+    document.getElementById('suggestForm').reset();
+    btn.textContent = T('sent');
+    setTimeout(()=>{ btn.textContent=T('sendSuggest'); btn.disabled=false; }, 4000);
+    hide('suggestError'); show('suggestSuccess');
+  } else {
+    btn.textContent = T('sendSuggest'); btn.disabled = false;
+    show('suggestError'); hide('suggestSuccess');
+  }
+}
+
+// ── Tab 2: Admin Add ──────────────────────────────────────────────────
+async function addTzaddik(ev){
+  ev.preventDefault();
+  const entry={
+    action:'add', key:getKey(),
+    month:document.getElementById('addMonth').value,
+    day:document.getElementById('addDay').value,
+    hebrewYear:document.getElementById('addHYear').value.trim(),
+    gregYear:document.getElementById('addGYear').value.trim(),
+    name:document.getElementById('addName').value.trim(),
+    fatherName:document.getElementById('addFather').value.trim(),
+    title:document.getElementById('addTitle').value.trim(),
+    private:document.getElementById('addPrivate').checked,
+    rabbi:document.getElementById('addRabbi').checked
+  };
+  if(!entry.name){alert(T('enterName'));return;}
+
+  const btn = ev.submitter || ev.target.querySelector('button[type=submit]');
+  btn.disabled = true; btn.textContent = T('saving');
+
+  // Save locally first — always visible immediately regardless of server result
+  const localEntry={month:entry.month,day:entry.day,hebrewYear:entry.hebrewYear,
+    gregYear:entry.gregYear,name:entry.name,fatherName:entry.fatherName,
+    title:entry.title,private:entry.private,rabbi:entry.rabbi};
+  LOCAL_EDITS.push(localEntry);
+  document.getElementById('addForm').reset();
+  btn.textContent = T('addToList'); btn.disabled = false;
+  show('addSuccess'); hide('addError');
+  renderToday(); renderSearch();
+
+  // Then sync to server in background
+  if(APPS_SCRIPT_URL){
+    const res=await postToSheet(entry);
+    if(res.error==='Unauthorized'){ clearKey(); updateAdminUI(); }
+  }
+}
+
+// ── Helpers ───────────────────────────────────────────────────────────
+function show(id){document.getElementById(id).style.display='block';setTimeout(()=>hide(id),4000);}
+function hide(id){document.getElementById(id).style.display='none';}
+
+function populateSelects(){
+  const hd=todayHebrew();
+  const todayM=MONTH_NAMES[hd.month], todayD=dayToHeb(hd.day);
+  ['searchMonth','addMonth','sugMonth','editMonth'].forEach(id=>{
+    document.getElementById(id).innerHTML=MONTHS_LIST
+      .map(m=>`<option value="${m}"${m===todayM&&id==='searchMonth'?' selected':''}>${m}</option>`).join('');
+  });
+  ['searchDay','addDay','sugDay','editDay'].forEach(id=>{
+    document.getElementById(id).innerHTML=DAYS_LIST
+      .map(d=>`<option value="${d}"${d===todayD&&id==='searchDay'?' selected':''}>${d}</option>`).join('');
+  });
+}
+
+// ── Edit entry ────────────────────────────────────────────────────────
+function openEditByKey(btn){
+  const key = btn.dataset.ekey;
+  const e = ENTRY_REGISTRY[key];
+  if(!e) return;
+  document.getElementById('editOrigKey').value = key;
+  document.getElementById('editMonth').value   = e.month      || '';
+  document.getElementById('editDay').value     = e.day        || '';
+  document.getElementById('editHYearNum').value = '';           // numeric helper — type to auto-fill
+  document.getElementById('editHYear').value   = e.hebrewYear || '';
+  document.getElementById('editGYear').value   = e.gregYear   || '';
+  document.getElementById('editName').value    = e.name       || '';
+  document.getElementById('editFather').value  = e.fatherName || '';
+  document.getElementById('editTitle').value   = e.title      || '';
+  document.getElementById('editPrivate').checked = !!e.private;
+  document.getElementById('editRabbi').checked   = (e.rabbi !== false && e.rabbi !== 'false');
+  document.getElementById('editError').style.display='none';
+  document.getElementById('editSaveBtn').textContent=T('saveChanges');
+  document.getElementById('editSaveBtn').disabled=false;
+  document.getElementById('editModal').style.display='block';
+}
+
+function closeEdit(){
+  document.getElementById('editModal').style.display='none';
+}
+
+async function deleteEntry(btn){
+  if(!confirm(T('confirmDelete'))) return;
+  const key=btn.dataset.ekey;
+  btn.disabled=true; btn.textContent='...';
+  const res=await postToSheet({action:'hide',key:getKey(),entryKey:key});
+  if(res.success||!APPS_SCRIPT_URL){
+    HIDDEN_KEYS.add(key);
+    LOCAL_HIDDEN.add(key);
+    renderToday(); renderSearch();
+  } else {
+    btn.disabled=false; btn.textContent='🗑️';
+    alert('שגיאה במחיקה');
+  }
+}
+
+function toggleShowHidden(){
+  showHidden=!showHidden;
+  const btn=document.getElementById('showHiddenBtn');
+  btn.textContent=showHidden?T('hideHiddenBtn'):T('showHiddenBtn');
+  btn.classList.toggle('active',showHidden);
+  renderToday(); renderSearch();
+}
+
+async function restoreEntry(btn){
+  const key=btn.dataset.ekey;
+  // Always restore locally first — server sync is best-effort
+  HIDDEN_KEYS.delete(key);
+  LOCAL_HIDDEN.delete(key);
+  renderToday(); renderSearch();
+  // Try to remove from server (needs redeployed Apps Script — ok to fail silently)
+  postToSheet({action:'unhide',key:getKey(),entryKey:key});
+}
+
+async function saveEdit(ev){
+  ev.preventDefault();
+  const origKey = document.getElementById('editOrigKey').value;
+  const btn = document.getElementById('editSaveBtn');
+  btn.disabled=true; btn.textContent=T('saving');
+
+  const newEntry = {
+    month:      document.getElementById('editMonth').value,
+    day:        document.getElementById('editDay').value,
+    hebrewYear: document.getElementById('editHYear').value.trim(),
+    gregYear:   document.getElementById('editGYear').value.trim(),
+    name:       document.getElementById('editName').value.trim(),
+    fatherName: document.getElementById('editFather').value.trim(),
+    title:      document.getElementById('editTitle').value.trim(),
+    private:    document.getElementById('editPrivate').checked,
+    rabbi:      document.getElementById('editRabbi').checked
+  };
+
+  // Is the original already a sheet row (EXTRA_DB or a locally-added entry)?
+  // If yes → UPDATE in place (no extra row). If no → it's an embedded entry → ADD + HIDE.
+  const isSheetEntry = EXTRA_DB.some(e=>fullEntryKey(e)===origKey) ||
+                       LOCAL_EDITS.some(e=>fullEntryKey(e)===origKey);
+
+  if(!APPS_SCRIPT_URL){
+    if(isSheetEntry){
+      EXTRA_DB    = EXTRA_DB.filter(e=>fullEntryKey(e)!==origKey);
+      LOCAL_EDITS = LOCAL_EDITS.filter(e=>fullEntryKey(e)!==origKey);
+    } else {
+      HIDDEN_KEYS.add(origKey);
+    }
+    LOCAL_EDITS.push(newEntry);
+    closeEdit(); renderToday(); renderSearch();
+    return;
+  }
+
+  if(isSheetEntry){
+    // Try UPDATE (clean, replaces row). Falls back to ADD+HIDE if Apps Script not redeployed yet.
+    const res = await postToSheet({ action:'update', key:getKey(), oldKey:origKey, ...newEntry });
+    if(res.success){
+      EXTRA_DB    = EXTRA_DB.filter(e=>fullEntryKey(e)!==origKey);
+      LOCAL_EDITS = LOCAL_EDITS.filter(e=>fullEntryKey(e)!==origKey);
+      LOCAL_EDITS.push(newEntry);
+    } else {
+      // Fallback for older deployed script
+      const addRes = await postToSheet({ action:'add', key:getKey(), ...newEntry });
+      if(!addRes.success){
+        document.getElementById('editError').style.display='block';
+        btn.disabled=false; btn.textContent=T('saveChanges');
+        return;
+      }
+      const hideRes = await postToSheet({ action:'hide', key:getKey(), entryKey:origKey });
+      if(!hideRes.success) console.warn('Hide failed:', hideRes.error);
+      HIDDEN_KEYS.add(origKey);
+      EXTRA_DB    = EXTRA_DB.filter(e=>fullEntryKey(e)!==origKey);
+      LOCAL_EDITS = LOCAL_EDITS.filter(e=>fullEntryKey(e)!==origKey);
+      LOCAL_EDITS.push(newEntry);
+    }
+  } else {
+    // Embedded entry: add new row to sheet + hide the original
+    const addRes = await postToSheet({ action:'add', key:getKey(), ...newEntry });
+    if(!addRes.success){
+      document.getElementById('editError').style.display='block';
+      btn.disabled=false; btn.textContent=T('saveChanges');
+      return;
+    }
+    const hideRes = await postToSheet({ action:'hide', key:getKey(), entryKey:origKey });
+    if(!hideRes.success) console.warn('Hide failed:', hideRes.error);
+    HIDDEN_KEYS.add(origKey);
+    LOCAL_EDITS.push(newEntry);
+  }
+
+  closeEdit();
+  btn.disabled=false; btn.textContent=T('saveChanges');
+  renderToday(); renderSearch();
+}
+
+// ── Message banner ────────────────────────────────────────────────────
+function renderMessage(){
+  const isAdmin=!!getKey();
+  const hasmsg=SITE_MESSAGE.trim()!=='';
+  document.getElementById('msgBanner').style.display   = hasmsg?'block':'none';
+  document.getElementById('msgText').textContent       = SITE_MESSAGE;
+  document.getElementById('msgAdminBtns').style.display= isAdmin&&hasmsg?'inline-flex':'none';
+  document.getElementById('msgAddBtn').style.display   = isAdmin&&!hasmsg?'block':'none';
+  document.getElementById('msgEditBar').style.display  = 'none';
+}
+
+function startEditMsg(){
+  document.getElementById('msgBanner').style.display='none';
+  document.getElementById('msgAddBtn').style.display='none';
+  document.getElementById('msgInput').value=SITE_MESSAGE;
+  document.getElementById('msgEditBar').style.display='flex';
+  document.getElementById('msgInput').focus();
+}
+
+function cancelEditMsg(){
+  document.getElementById('msgEditBar').style.display='none';
+  renderMessage();
+}
+
+async function saveMsg(){
+  const txt=document.getElementById('msgInput').value.trim();
+  const btn=document.getElementById('msgSaveBtn');
+  btn.disabled=true; btn.textContent=T('saving');
+  const res=await postToSheet({action:'setMessage',key:getKey(),message:txt});
+  btn.disabled=false; btn.textContent=T('save');
+  if(res.success){ SITE_MESSAGE=txt; renderMessage(); }
+  else alert(T('saveError'));
+}
+
+async function clearMsg(){
+  if(!confirm(T('confirmClearMsg'))) return;
+  const res=await postToSheet({action:'setMessage',key:getKey(),message:''});
+  if(res.success){ SITE_MESSAGE=''; renderMessage(); }
+}
+
+function showTab(n){
+  document.querySelectorAll('.tab-content').forEach((t,i)=>t.classList.toggle('active',i===n));
+  document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active',i===n));
+}
+
+// ── Init ──────────────────────────────────────────────────────────────
+populateSelects();
+applyLang();
+updateAdminUI();
+document.getElementById('noSheetNotice').style.display = APPS_SCRIPT_URL ? 'none' : 'block';
+fetchSheetEntries();
+</script>
+</body>
+</html>
