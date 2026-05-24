@@ -313,7 +313,7 @@ const TRANSLATIONS = {
     confirmDelete:'למחוק רשומה זו?',
     confirmPopulate:'להעלות את כל הרשימה (~460 צדיקים) לגיליון Google?\nהכרטיסייה "כל הרשימה" תיכתב מחדש.',
     confirmClearMsg:'למחוק את ההודעה?',
-    enterName:'יש להזין שם', saveError:'שגיאה בשמירה', wrongPassword:'סיסמה שגויה, נסה שוב',
+    enterName:'יש להזין שם', saveError:'שגיאה בשמירה', wrongPassword:'סיסמה שגויה, נסה שוב', serverError:'שגיאת שרת, נסה שוב',
     navYest:'אתמול', navTomr:'מחר',
     sending:'...שולח', sent:'✅ נשלח!',
     saving:'...שומר', uploading:'...מעלה', uploadedOk:'✅ הועלו',
@@ -352,7 +352,7 @@ const TRANSLATIONS = {
     confirmDelete:'Delete this entry?',
     confirmPopulate:'Upload the full list (~460 tzaddikim) to Google Sheet?\nThe "Full List" tab will be overwritten.',
     confirmClearMsg:'Delete this message?',
-    enterName:'Please enter a name', saveError:'Error saving', wrongPassword:'Wrong password, please try again',
+    enterName:'Please enter a name', saveError:'Error saving', wrongPassword:'Wrong password, please try again', serverError:'Server error, try again',
     navYest:'Yesterday', navTomr:'Tomorrow',
     sending:'...Sending', sent:'✅ Sent!',
     saving:'...Saving', uploading:'...Uploading', uploadedOk:'✅ Uploaded',
@@ -1065,13 +1065,13 @@ async function saveAdminKey(){
   const loginBtn=document.querySelector('#adminKeyInput .btn');
   loginBtn.disabled=true; loginBtn.textContent='...';
   // Validate password against server before granting access
-  // Only block on explicit Unauthorized — network/unknown errors still allow login
   if(APPS_SCRIPT_URL){
     const res=await postToSheet({action:'validate',key:k});
-    if(res.error==='Unauthorized'){
+    if(!res.success){
       loginBtn.disabled=false; loginBtn.textContent=T('loginBtn');
       document.getElementById('keyInput').value='';
-      document.getElementById('keyInput').placeholder=T('wrongPassword');
+      const msg = res.error==='Unauthorized' ? T('wrongPassword') : T('serverError');
+      document.getElementById('keyInput').placeholder=msg;
       setTimeout(()=>{ document.getElementById('keyInput').placeholder=T('keyPh'); },3000);
       return;
     }
