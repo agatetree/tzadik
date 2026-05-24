@@ -85,6 +85,14 @@ textarea{resize:vertical;min-height:60px}
 .modal-box{background:#fff;max-width:480px;margin:0 auto;border-radius:10px;padding:22px 20px;direction:rtl}
 .modal-box h3{color:#1a2e44;margin-bottom:14px;border-bottom:1px solid #eee;padding-bottom:8px;font-size:1rem}
 </style>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1a2e44">
+<link rel="apple-touch-icon" href="icon.png">
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js');
+  }
+</script>
 </head>
 <body>
 <header>
