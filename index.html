@@ -186,6 +186,9 @@ textarea{resize:vertical;min-height:60px}
           <button class="btn btn-sm" onclick="saveAdminKey()" data-i18n="loginBtn">כניסה</button>
           <button class="btn-outline btn-sm" onclick="cancelAdminKey()" data-i18n="cancel">ביטול</button>
         </div>
+        <div style="text-align:center;margin-top:8px">
+          <button class="admin-link" onclick="recoverPassword()" id="recoverBtn" data-i18n="forgotPassword">שכחתי סיסמה</button>
+        </div>
       </div>
     </div>
 
@@ -313,7 +316,7 @@ const TRANSLATIONS = {
     confirmDelete:'למחוק רשומה זו?',
     confirmPopulate:'להעלות את כל הרשימה (~460 צדיקים) לגיליון Google?\nהכרטיסייה "כל הרשימה" תיכתב מחדש.',
     confirmClearMsg:'למחוק את ההודעה?',
-    enterName:'יש להזין שם', saveError:'שגיאה בשמירה', wrongPassword:'סיסמה שגויה, נסה שוב', serverError:'שגיאת שרת, נסה שוב',
+    enterName:'יש להזין שם', saveError:'שגיאה בשמירה', wrongPassword:'סיסמה שגויה, נסה שוב', serverError:'שגיאת שרת, נסה שוב', forgotPassword:'שכחתי סיסמה', recoverSent:'✅ נשלח למייל!',
     navYest:'אתמול', navTomr:'מחר',
     sending:'...שולח', sent:'✅ נשלח!',
     saving:'...שומר', uploading:'...מעלה', uploadedOk:'✅ הועלו',
@@ -352,7 +355,7 @@ const TRANSLATIONS = {
     confirmDelete:'Delete this entry?',
     confirmPopulate:'Upload the full list (~460 tzaddikim) to Google Sheet?\nThe "Full List" tab will be overwritten.',
     confirmClearMsg:'Delete this message?',
-    enterName:'Please enter a name', saveError:'Error saving', wrongPassword:'Wrong password, please try again', serverError:'Server error, try again',
+    enterName:'Please enter a name', saveError:'Error saving', wrongPassword:'Wrong password, please try again', serverError:'Server error, try again', forgotPassword:'Forgot password', recoverSent:'✅ Sent to email!',
     navYest:'Yesterday', navTomr:'Tomorrow',
     sending:'...Sending', sent:'✅ Sent!',
     saving:'...Saving', uploading:'...Uploading', uploadedOk:'✅ Uploaded',
@@ -1084,6 +1087,20 @@ async function saveAdminKey(){
   renderToday(); renderSearch();
 }
 function logoutAdmin(){ clearKey(); updateAdminUI(); renderToday(); renderSearch(); }
+
+async function recoverPassword(){
+  const btn = document.getElementById('recoverBtn');
+  if(!APPS_SCRIPT_URL){ alert(T('serverError')); return; }
+  btn.disabled = true; btn.textContent = '...';
+  const res = await postToSheet({ action: 'recover' });
+  if(res.success){
+    btn.textContent = T('recoverSent');
+    setTimeout(()=>{ btn.textContent = T('forgotPassword'); btn.disabled = false; }, 4000);
+  } else {
+    btn.textContent = T('serverError');
+    setTimeout(()=>{ btn.textContent = T('forgotPassword'); btn.disabled = false; }, 3000);
+  }
+}
 
 async function populateSheet(){
   if(!APPS_SCRIPT_URL){ alert('יש להגדיר Apps Script URL קודם'); return; }
